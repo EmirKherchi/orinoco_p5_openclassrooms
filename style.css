@@ -1,0 +1,38 @@
+
+h1,p{
+    text-align: center;
+}
+
+img{
+    
+    margin: auto;
+    width: 30%;
+    display: none;
+}
+#product{
+    float: right;
+    margin-top: 20%;
+}
+nav{
+    position: absolute;
+    float: left;
+    padding-top: 15%;
+    padding-right: 5%;
+    height: 100%;
+    border-right: 1px solid;
+}
+
+li{
+    font-size: 2em;
+    font-weight: 600;
+    list-style: none;
+    cursor: pointer;
+    Margin-top: 50%;
+    
+
+    
+}
+li:hover{
+border-bottom: 1px solid black;
+   
+}
