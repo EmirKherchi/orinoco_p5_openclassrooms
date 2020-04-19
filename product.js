@@ -1,9 +1,14 @@
+//Déclaration des variables
 
- //Déclaration des variables
- 
 const title = document.getElementById("title");
 const img = document.getElementById("image");
 const description = document.getElementById("description");
+const price = document.getElementById("price");
+
+//dropdown menu dynamique
+let menu = document.getElementById('choose-color')
+
+
 
 //variable elements de navigation
 
@@ -15,23 +20,48 @@ const five = document.getElementById("five");
 
 //fetch, apel de l'api
 
-fetch("http://localhost:3000/api/teddies").then(function (response) {
+fetch("http://localhost:3000/api/teddies")
+.then(function (response) {
   response.json().then(function (product) {
-    
     //création de l'objet Teddybear.
-    
-    function teddyBear(name, price, description, colors, id, image) {
-      this.name = name;
-      this.price = price;
-      this.description = description;
-      this.colors = colors;
-      this.id = id;
-      this.image = image;
+
+    class teddyBear {
+      constructor(name, price, description, colors, id, image) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.colors = colors;
+        this.id = id;
+        this.image = image;
+      }
+      //methode d'instances
+      teddys() {
+        title.innerHTML = this.name;
+        img.src = this.image;
+        img.style.display = "block";
+        description.innerHTML = this.description;
+        price.innerHTML = (this.price / 100).toFixed(2) + " €"; //divisé par 100, en gardant deux chiffres après la virgule
+        
+        
+        
+        let dropdown = document.createElement('select'); //création du menu de selection
+let defaultOption = document.createElement('option');//creation des option du dropdown menu
+defaultOption.text = 'Personalisez votre ourson';
+dropdown.add(defaultOption); // ajout du texte par défaut
+dropdown.selectedIndex = 0;
+dropdown.length = 0;  
+        
+        menu.prepend(dropdown);// ajout du dropdown à la div parent "choose-color".
+        
+        
+        for (let i = 0; i < this.colors.length; i++) {
+          option = document.createElement('option');
+      	  option.innerHTML = this.colors[i];
+      	  dropdown.add(option);
+    	}    
+      }
     }
 
-    
-
-  
     // création des instances
 
     const norbert = new teddyBear(
@@ -75,30 +105,21 @@ fetch("http://localhost:3000/api/teddies").then(function (response) {
       product[4].imageUrl
     );
 
-    //création d'une fonction teddys afin d'automatiser les modifications du dom.
-
-    function teddys(teddy) {
-      title.innerHTML = teddy.name;
-      img.src = teddy.image;
-      img.style.display = "block";
-      description.innerHTML = teddy.description;
-    }
-
     // mise en place des evenements avec appel de la fonction teddys.
     one.addEventListener("click", function () {
-      teddys(norbert);
+      norbert.teddys();
     });
     two.addEventListener("click", function () {
-      teddys(arnold);
+      arnold.teddys();
     });
     three.addEventListener("click", function () {
-      teddys(lennyAndCarl);
+      lennyAndCarl.teddys();
     });
     four.addEventListener("click", function () {
-      teddys(gustav);
+      gustav.teddys();
     });
     five.addEventListener("click", function () {
-      teddys(garfunkel);
+      garfunkel.teddys();
     });
   });
 });
