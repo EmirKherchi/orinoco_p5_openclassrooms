@@ -7,6 +7,10 @@ const price = document.getElementById("price");
 
 //dropdown menu dynamique
 let menu = document.getElementById('choose-color')
+let dropdown = document.createElement('select'); //création du menu de selection
+let defaultOption = document.createElement('option');//creation des option du dropdown menu
+defaultOption.text = 'Personalisez votre ourson';
+dropdown.add(defaultOption); // ajout du texte par défaut
 
 
 
@@ -18,7 +22,7 @@ const three = document.getElementById("three");
 const four = document.getElementById("four");
 const five = document.getElementById("five");
 
-//fetch, apel de l'api
+//fetch, appel de l'api et promesse
 
 fetch("http://localhost:3000/api/teddies")
 .then(function (response) {
@@ -41,25 +45,20 @@ fetch("http://localhost:3000/api/teddies")
         img.style.display = "block";
         description.innerHTML = this.description;
         price.innerHTML = (this.price / 100).toFixed(2) + " €"; //divisé par 100, en gardant deux chiffres après la virgule
-        
-        
-        
-        let dropdown = document.createElement('select'); //création du menu de selection
-let defaultOption = document.createElement('option');//creation des option du dropdown menu
-defaultOption.text = 'Personalisez votre ourson';
-dropdown.add(defaultOption); // ajout du texte par défaut
-dropdown.selectedIndex = 0;
-dropdown.length = 0;  
-        
+       
         menu.prepend(dropdown);// ajout du dropdown à la div parent "choose-color".
         
-        
+        let option;
         for (let i = 0; i < this.colors.length; i++) {
           option = document.createElement('option');
-      	  option.innerHTML = this.colors[i];
+          option.text = this.colors[i];
       	  dropdown.add(option);
-    	}    
+        }
+       
       }
+    
+        
+      
     }
 
     // création des instances
@@ -110,6 +109,7 @@ dropdown.length = 0;
       norbert.teddys();
     });
     two.addEventListener("click", function () {
+      
       arnold.teddys();
     });
     three.addEventListener("click", function () {
@@ -117,6 +117,7 @@ dropdown.length = 0;
     });
     four.addEventListener("click", function () {
       gustav.teddys();
+      
     });
     five.addEventListener("click", function () {
       garfunkel.teddys();
