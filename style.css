@@ -10,29 +10,36 @@ img{
     display: none;
 }
 #product{
-    float: right;
-    margin-top: 20%;
+    
+    margin-top: 5%;
 }
 nav{
-    position: absolute;
-    float: left;
-    padding-top: 15%;
-    padding-right: 5%;
-    height: 100%;
-    border-right: 1px solid;
+   text-align:center;
+   margin: 0;
+   padding: 0;
+}
+ul{
+    padding: 2% 0;
+    background-color: #dddddd;
+    margin: 0;
 }
 
 li{
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 600;
     list-style: none;
     cursor: pointer;
-    Margin-top: 50%;
-    
+    display: inline-block;
+    margin-right: 25px;
 
     
 }
 li:hover{
 border-bottom: 1px solid black;
    
+}
+
+#choose-color{
+    text-align: center;
+    display: none;
 }

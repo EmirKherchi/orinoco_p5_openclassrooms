@@ -1,31 +1,25 @@
-//Déclaration des variables
+//elements des variables
 
 const title = document.getElementById("title");
 const img = document.getElementById("image");
 const description = document.getElementById("description");
 const price = document.getElementById("price");
 
-//dropdown menu dynamique
-let menu = document.getElementById('choose-color')
-let dropdown = document.createElement('select'); //création du menu de selection
-let defaultOption = document.createElement('option');//creation des option du dropdown menu
-defaultOption.text = 'Personalisez votre ourson';
-dropdown.add(defaultOption); // ajout du texte par défaut
+//elements menu de personalisation
+const menu = document.getElementById("choose-color");
+const dropdown = document.getElementById("dropdown");
 
+//elements de navigation
 
-
-//variable elements de navigation
-
-const one = document.getElementById("one");
-const two = document.getElementById("two");
-const three = document.getElementById("three");
-const four = document.getElementById("four");
-const five = document.getElementById("five");
+const norb = document.getElementById("norbert");
+const arn = document.getElementById("arnold");
+const lennyNCarl = document.getElementById("lennyandcarl");
+const gus = document.getElementById("gustav");
+const garf = document.getElementById("garfunkel");
 
 //fetch, appel de l'api et promesse
 
-fetch("http://localhost:3000/api/teddies")
-.then(function (response) {
+fetch("http://localhost:3000/api/teddies").then(function (response) {
   response.json().then(function (product) {
     //création de l'objet Teddybear.
 
@@ -45,20 +39,20 @@ fetch("http://localhost:3000/api/teddies")
         img.style.display = "block";
         description.innerHTML = this.description;
         price.innerHTML = (this.price / 100).toFixed(2) + " €"; //divisé par 100, en gardant deux chiffres après la virgule
-       
-        menu.prepend(dropdown);// ajout du dropdown à la div parent "choose-color".
-        
-        let option;
+        menu.style.display = "block";
+
+        dropdown.options.length = 0; //(re) mise  à zero du tableau options, pour ne pas conserver les anciennes valeurs du présent lors de l'ancien click.
+        let defaultOption = document.createElement("option"); //creation de l'option par default
+        defaultOption.text = "Personalisez votre ourson";
+        dropdown.add(defaultOption); // ajout du texte par défaut, à l'option par defaut
+
         for (let i = 0; i < this.colors.length; i++) {
-          option = document.createElement('option');
-          option.text = this.colors[i];
-      	  dropdown.add(option);
+          let choice;
+          choice = document.createElement("option"); // creation l'option vide dee choix.
+          dropdown.add(choice); //ajout de l'option au tableau dropdown
+          choice.innerHTML = this.colors[i]; //ajout de la valeur à l'option dans le tableau
         }
-       
       }
-    
-        
-      
     }
 
     // création des instances
@@ -105,21 +99,19 @@ fetch("http://localhost:3000/api/teddies")
     );
 
     // mise en place des evenements avec appel de la fonction teddys.
-    one.addEventListener("click", function () {
+    norb.addEventListener("click", function () {
       norbert.teddys();
     });
-    two.addEventListener("click", function () {
-      
+    arn.addEventListener("click", function () {
       arnold.teddys();
     });
-    three.addEventListener("click", function () {
+    lennyNCarl.addEventListener("click", function () {
       lennyAndCarl.teddys();
     });
-    four.addEventListener("click", function () {
+    gus.addEventListener("click", function () {
       gustav.teddys();
-      
     });
-    five.addEventListener("click", function () {
+    garf.addEventListener("click", function () {
       garfunkel.teddys();
     });
   });
