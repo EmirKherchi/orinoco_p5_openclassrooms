@@ -4,6 +4,9 @@ const title = document.getElementById("title");
 const img = document.getElementById("image");
 const description = document.getElementById("description");
 const price = document.getElementById("price");
+const noSelection = document.getElementById("no-selection");
+const divBtn = document.getElementById("btn"); //div contenant le btn
+const numberEltCart = document.getElementById("number");
 
 //elements menu de personalisation
 const menu = document.getElementById("choose-color");
@@ -34,12 +37,14 @@ fetch("http://localhost:3000/api/teddies").then(function (response) {
       }
       //methode d'instances
       teddys() {
+        noSelection.style.display = "none";
         title.innerHTML = this.name;
         img.src = this.image;
         img.style.display = "block";
         description.innerHTML = this.description;
         price.innerHTML = (this.price / 100).toFixed(2) + " €"; //divisé par 100, en gardant deux chiffres après la virgule
         menu.style.display = "block";
+        divBtn.style.display = "block";
 
         dropdown.options.length = 0; //(re) mise  à zero du tableau options, pour ne pas conserver les anciennes valeurs du présent lors de l'ancien click.
         let defaultOption = document.createElement("option"); //creation de l'option par default
@@ -48,7 +53,7 @@ fetch("http://localhost:3000/api/teddies").then(function (response) {
 
         for (let i = 0; i < this.colors.length; i++) {
           let choice;
-          choice = document.createElement("option"); // creation l'option vide dee choix.
+          choice = document.createElement("option"); // creation l'option vide de choix.
           dropdown.add(choice); //ajout de l'option au tableau dropdown
           choice.innerHTML = this.colors[i]; //ajout de la valeur à l'option dans le tableau
         }
@@ -98,21 +103,36 @@ fetch("http://localhost:3000/api/teddies").then(function (response) {
       product[4].imageUrl
     );
 
-    // mise en place des evenements avec appel de la fonction teddys.
-    norb.addEventListener("click", function () {
-      norbert.teddys();
-    });
-    arn.addEventListener("click", function () {
-      arnold.teddys();
-    });
-    lennyNCarl.addEventListener("click", function () {
-      lennyAndCarl.teddys();
-    });
-    gus.addEventListener("click", function () {
-      gustav.teddys();
-    });
-    garf.addEventListener("click", function () {
-      garfunkel.teddys();
-    });
+    // mise en place des evenements avec appel de la method teddys dans une fonction showTeddy.
+    function showTeddy(eltNav, ours) {
+      eltNav.addEventListener("click", function () {
+        ours.teddys();
+      });
+    }
+    // appel de la fonction avec le nom de l'element du dom et le nom de la constante en paramètre.
+    showTeddy(norb, norbert);
+    showTeddy(arn, arnold);
+    showTeddy(lennyNCarl, lennyAndCarl);
+    showTeddy(gus, gustav);
+    showTeddy(garf, garfunkel);
   });
 });
+
+const cart = []; //init de mon cart
+
+function localStorage() {
+  divBtn.addEventListener("click", function () {
+    //sur le clique "ajout au panier"
+    cart.push([title.textContent, price.textContent, dropdown.value]); // ajoute un new array avec ses elements
+    numberEltCart.innerHTML = "(" + cart.length + ")"; //ajoute le nombre de produit présent dans le panier dans la barre de nav
+
+    //modal de confirmation pour continuer ou non le shopping
+    window.confirm;
+    if (confirm("Voulez-vous voir votre panier ?")) {
+      window.location.href = "cart.html";
+    } else {
+      //reste sur la page teddy
+    }
+  });
+}
+localStorage();
