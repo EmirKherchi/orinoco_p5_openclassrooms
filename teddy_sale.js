@@ -118,21 +118,32 @@ fetch("http://localhost:3000/api/teddies").then(function (response) {
   });
 });
 
-const cart = []; //init de mon cart
+/******LE PANIER******/
 
-function localStorage() {
-  divBtn.addEventListener("click", function () {
-    //sur le clique "ajout au panier"
-    cart.push([title.textContent, price.textContent, dropdown.value]); // ajoute un new array avec ses elements
-    numberEltCart.innerHTML = "(" + cart.length + ")"; //ajoute le nombre de produit présent dans le panier dans la barre de nav
-
-    //modal de confirmation pour continuer ou non le shopping
-    window.confirm;
-    if (confirm("Voulez-vous voir votre panier ?")) {
-      window.location.href = "cart.html";
-    } else {
-      //reste sur la page teddy
-    }
-  });
+//creation ou appel du panier client
+if (localStorage.getItem("cart")) {
+  //si le panier existe ne pas le créer ni l'initialiser
+} else {
+  console.log("nouvel utilisateur, création du panier");
+  let panierInit = [];
+  localStorage.setItem("cart", JSON.stringify(panierInit));
 }
-localStorage();
+
+let cart = JSON.parse(localStorage.getItem("cart")); // le pannier est créer et est un array et récupère ses datas du local storage
+numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur dans la navbar
+console.log("voici les produits présents dans le panier " + cart);
+
+//fonction ajoutant les produit dans le panier au click
+divBtn.addEventListener("click", function () {
+  cart.push([title.textContent,dropdown.value,price.textContent]); // ajoute un new array avec ses elements
+  localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage
+  numberEltCart.innerHTML = "(" + cart.length + ")"; //Ajout de l'element au compteur de la nav bar
+
+  // window.confirm; //modal de confirmation pour continuer ou non le shopping
+  // if (confirm("Voulez-vous voir votre panier ?")) {
+  //   window.location.href = "cart.html";
+  // } else {
+  //   //reste sur la page produit
+  // }
+});
+
