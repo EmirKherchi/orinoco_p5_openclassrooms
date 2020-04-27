@@ -236,3 +236,7 @@ p {
     transition: 300ms ease;
     margin-top: 15px;
 }
+
+.cart #total{
+  margin-top: 70px;
+} 
