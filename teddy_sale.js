@@ -7,6 +7,7 @@ const price = document.getElementById("price");
 const noSelection = document.getElementById("no-selection");
 const divBtn = document.getElementById("btn"); //div contenant le btn
 const numberEltCart = document.getElementById("number");
+const id = document.getElementById("id")
 
 //elements menu de personalisation
 const menu = document.getElementById("choose-color");
@@ -42,6 +43,8 @@ fetch("http://localhost:3000/api/teddies").then(function (response) {
         img.src = this.image;
         img.style.display = "block";
         description.innerHTML = this.description;
+        id.innerHTML=this.id; // ajout de l'id pour recupération lors du POST
+        id.style.display = "none";//ID masqué sur la page client
         price.innerHTML = (this.price / 100).toFixed(2) + " €"; //divisé par 100, en gardant deux chiffres après la virgule
         menu.style.display = "block";
         divBtn.style.display = "block";
@@ -131,19 +134,19 @@ if (localStorage.getItem("cart")) {
 
 let cart = JSON.parse(localStorage.getItem("cart")); // le pannier est créer et est un array et récupère ses datas du local storage
 numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur dans la navbar
-console.log("voici les produits présents dans le panier " + cart);
+
 
 //fonction ajoutant les produit dans le panier au click
 divBtn.addEventListener("click", function () {
-  cart.push([title.textContent,dropdown.value,price.textContent]); // ajoute un new array avec ses elements
+  cart.push([title.textContent,dropdown.value,price.textContent,id.textContent]); // ajoute un new array avec ses elements
   localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage
   numberEltCart.innerHTML = "(" + cart.length + ")"; //Ajout de l'element au compteur de la nav bar
 
-  // window.confirm; //modal de confirmation pour continuer ou non le shopping
-  // if (confirm("Voulez-vous voir votre panier ?")) {
-  //   window.location.href = "cart.html";
-  // } else {
-  //   //reste sur la page produit
-  // }
+  window.confirm; //modal de confirmation pour continuer ou non le shopping
+  if (confirm("Voulez-vous voir votre panier ?")) {
+    window.location.href = "cart.html";
+  } else {
+    //reste sur la page produit
+  }
 });
 

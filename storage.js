@@ -10,7 +10,7 @@ let total = 0; //init d'un variable qui récupèrera la somme du tableau des pri
 const cart = JSON.parse(localStorage.getItem("cart"));//récupération des elements dans le local storage
 numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur dans la navbar
 /*************/
-
+console.log("voici les produits présents dans le panier " + cart);
 
 /**Creation du tableau**/
 for (let i = 0; i < cart.length; i++) {
@@ -26,7 +26,7 @@ for (let i = 0; i < cart.length; i++) {
 }
 
 
-/**creation d'un button remove et récupération des prix totaux**/
+/**creation d'un button remove et récupération des prix totaux / suppression de la colonne ID**/
 const line = document.getElementsByClassName("tableLine"); //pointe toutes les nouvelles lignes
 const totalPrice=[]//tableau vide pour ajout des prix par article
 
@@ -37,12 +37,14 @@ for (i = 0; i < line.length; i++) {
   btn.innerHTML = "X";
 
   const allPrice = line[i].cells[2].textContent;//récupération des cellules contenant le prix de chaque article
+  const allID = line[i].cells[3]; //suppression de la colonne avec tous les ID produit visible, IDs uniquement présent dans le cart.
+  allID.style.display="none";
   totalPrice.push(parseFloat(allPrice));// ajout des prix au tableau pour le total
 }
 for(let i = 0; i < totalPrice.length; i++){
   total += totalPrice[i];//ajout de la somme des prix du array à total
 }
-totalCart.innerHTML=total +" €";
+totalCart.innerHTML=total +" €" + "<br>Nombre d'articles dans le panier: " + cart.length ;
 
 
 
@@ -55,4 +57,4 @@ for (let j = 0; j < removeBtn.length; j++) { //pour chaque btn de list
     location.reload(true); //rafraichi la page
   });
 }
-
+const postUrl = "http://localhost:3000/api/teddies"
