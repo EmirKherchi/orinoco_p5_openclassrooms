@@ -122,6 +122,10 @@ p {
   text-align: center;
   margin-bottom: 5%;
 }
+.teddy #description{
+  margin-top: 25px;
+  text-align: left;
+}
 
 .teddy img {
   margin: auto;
@@ -129,7 +133,7 @@ p {
   display: none;
 }
 .teddy #product {
-  margin-top: 140px;
+  margin-top: 100px;
   margin-left: 20%;
 }
 
@@ -233,8 +237,11 @@ p {
     text-decoration: none;
     font-size: 10px; 
     cursor: pointer;
-    transition: 300ms ease;
+    transition: 100ms ease;
     margin-top: 15px;
+}
+.btnLine:hover{
+  background-color: rgb(206, 59, 59);
 }
 
 .cart #total{

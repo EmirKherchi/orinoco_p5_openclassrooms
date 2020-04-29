@@ -23,10 +23,9 @@ const garf = document.getElementById("garfunkel");
 
 //fetch, appel de l'api et promesse
 
-fetch("http://localhost:3000/api/teddies").then(function (response) {
+fetch("http://localhost:3000/api/teddies/").then(function (response) {
   response.json().then(function (product) {
     //création de l'objet Teddybear.
-
     class teddyBear {
       constructor(name, price, description, colors, id, image) {
         this.name = name;
@@ -125,18 +124,18 @@ fetch("http://localhost:3000/api/teddies").then(function (response) {
 
 //creation ou appel du panier client
 if (localStorage.getItem("cart")) {
-  //si le panier existe ne pas le créer ni l'initialiser
+  //si le panier existe ne pas le créer et l'initialiser
 } else {
   console.log("nouvel utilisateur, création du panier");
   let panierInit = [];
   localStorage.setItem("cart", JSON.stringify(panierInit));
 }
 
-let cart = JSON.parse(localStorage.getItem("cart")); // le pannier est créer et est un array et récupère ses datas du local storage
+let cart = JSON.parse(localStorage.getItem("cart")); // le pannier est créer et est un array le local storage recupère ses datas de cart
 numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur dans la navbar
 
 
-//fonction ajoutant les produit dans le panier au click
+//fonction ajoutant les produits dans le panier au click
 divBtn.addEventListener("click", function () {
   cart.push([title.textContent,dropdown.value,price.textContent,id.textContent]); // ajoute un new array avec ses elements
   localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage
