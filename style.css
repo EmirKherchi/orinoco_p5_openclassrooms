@@ -33,6 +33,7 @@ header #number{
 footer nav {
   position: fixed;
   bottom: 0;
+  
   width: 100%;
   text-align: center;
 }
@@ -246,4 +247,36 @@ p {
 
 .cart #total{
   margin-top: 70px;
+
 } 
+
+.cart #cartForm{
+ margin-top: 100px;
+ margin-bottom: 200px;
+ 
+}
+.cart #cartForm form{
+  font-weight: 600;
+ 
+ 
+}
+.cart #cartForm input{
+  margin-bottom: 20px;
+  width: 40%;
+  height: 25px;
+}
+
+ #envoiDuPanier {
+  background-color: #333; /* Green */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    margin-top: 30px;
+    transition: 300ms ease;    
+}
+
+ #envoiDuPanier:hover{
+  color:#333;
+  background-color: #fff;
+  border: solid 1px #333;}
