@@ -77,25 +77,30 @@ const mail = document.getElementById("email");
 const btnSubmit = document.getElementById("envoiDuPanier");
 const regexLettersOnly = /^[a-zA-Z]+$/;
 const regexEmail = /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@{[a-zA-Z0-9_\-\.]+0\.([a-zA-Z]{2,5}){1,25})+)*$/;
+const regexAdress = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
+const regexCity = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
 
-let idProduit = []; //init du tableau contenant les id des différents produits dans le panier
-function getobjetID() {
-  idProduit = [];
+
+let products = []; //init du tableau contenant les id des différents produits dans le panier
+let send
+
+function getObjetID() { //function pour récupérer tout les id produit du tableau html
+  products = []; // [re]mise à zero du array
   for (let i = 0; i < cart.length; i++) {
-    idProduit.push(cart[i][3]);
+    products.push(cart[i][3]); // ajout des id dans le tableau products
   }
-  console.log(idProduit)
 }
+getObjetID(); // appel de la fonction pour récupéré les id des produits
 
-let contact = {
+let contact = { // création de l'objet contact
   firstName: "",
-  name: "",
-  adresse: adresse.value,
+  lastName: "",
+  address: "",
   city: "",
   email: "",
 };
 
-function checkInfo() {
+function checkFormInput() {// vérification de tout les champs un par un et ajout des valeurs au key de contact
   if (regexLettersOnly.test(fName.value) == false) {
     //Regex prénom
     alert("Le champs prénom est éronné");
@@ -106,62 +111,52 @@ function checkInfo() {
       //Regex nom
       alert("Le champs nom est éronné");
     } else {
-      contact.name = lName.value;
+      contact.lastName = lName.value;
 
-      if (regexLettersOnly.test(ville.value) == false) {
-        //Regex nom
-        alert("Le champs ville est éronné");
+      if (regexAdress.test(adresse.value) == false) {
+        //Regex adresse
+        alert("Le champs adresse est éronné");
       } else {
-        contact.city = ville.value;
+        contact.address = adresse.value;
 
-        if (regexEmail.test(mail.value) == false) {
-          //Regex nom
-          alert("Le Email ville est éronné");
+        if (regexCity.test(ville.value) == false) {
+          //Regex ville
+          alert("Le champs ville est éronné");
         } else {
-          contact.email = mail.value;
-          console.log(contact);
-          
+          contact.city = ville.value;
+
+          if (regexEmail.test(mail.value) == false) {
+            //Regex nom
+            alert("Le champs Email est éronné");
+          } else {
+            contact.email = mail.value;
+            send = {contact,products}
+            console.log(JSON.stringify(send));
+            //lorsque tout est vérifié envoi des données au serveur
+           fetch('http://localhost:3000/api/teddies/order', {
+                method: 'POST',
+                hearders:{
+                  'Content-type': 'application/json' //je t'envoi du json
+                },
+                body: JSON.stringify(send)
+              })
+          }
         }
       }
     }
   }
 }
 
+
+
 envoiDuPanier.addEventListener("click", function (e) {
   e.preventDefault();
-
-  checkInfo(contact);
-  getobjetID();
+  checkFormInput();
+  
 });
 
-// envoiDonnees = (objetRequest) => {
-//   return new Promise((resolve)=>{
-//     let request = new XMLHttpRequest();
-//     request.onreadystatechange = function() {
-//       if(this.readyState == XMLHttpRequest.DONE && this.status == 201)
-//       {
-//         //Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans order-confirm.html
-//         sessionStorage.setItem("order", this.responseText);
 
-//         //Chargement de la page de confirmation
-//         // document.forms["form-panier"].action = './order-confirm.html';
-//         // document.forms["form-panier"].submit();
 
-//         resolve(JSON.parse(this.responseText));
-//     }
-// };
-// request.open("POST", "http://localhost:3000/api/teddies/order");
-// request.setRequestHeader("Content-Type", "application/json");
-// request.send(objetRequest);
-// });
-// };
 
-// const sendCart = async function(data){
-//   let response = await fetch('http://localhost:3000/api/teddies/order', {
-//     method: 'POST',
-//     hearders:{
-//       'Content-type': 'application/json' //je t'envoi du json
-//     },
-//     body: JSON.stringify(data)
-//   })
-// }
+
+
