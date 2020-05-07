@@ -75,75 +75,64 @@ const ville = document.getElementById("city");
 const mail = document.getElementById("email");
 
 const btnSubmit = document.getElementById("envoiDuPanier");
-const regexLettersOnly = /^[a-zA-Z]+$/
+const regexLettersOnly = /^[a-zA-Z]+$/;
+const regexEmail = /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@{[a-zA-Z0-9_\-\.]+0\.([a-zA-Z]{2,5}){1,25})+)*$/;
 
 let idProduit = []; //init du tableau contenant les id des différents produits dans le panier
 function getobjetID() {
-  idProduit = []; 
+  idProduit = [];
   for (let i = 0; i < cart.length; i++) {
     idProduit.push(cart[i][3]);
   }
+  console.log(idProduit)
 }
 
+let contact = {
+  firstName: "",
+  name: "",
+  adresse: adresse.value,
+  city: "",
+  email: "",
+};
 
+function checkInfo() {
+  if (regexLettersOnly.test(fName.value) == false) {
+    //Regex prénom
+    alert("Le champs prénom est éronné");
+  } else {
+    contact.firstName = fName.value;
 
+    if (regexLettersOnly.test(lName.value) == false) {
+      //Regex nom
+      alert("Le champs nom est éronné");
+    } else {
+      contact.name = lName.value;
 
+      if (regexLettersOnly.test(ville.value) == false) {
+        //Regex nom
+        alert("Le champs ville est éronné");
+      } else {
+        contact.city = ville.value;
 
-
-
-
-
+        if (regexEmail.test(mail.value) == false) {
+          //Regex nom
+          alert("Le Email ville est éronné");
+        } else {
+          contact.email = mail.value;
+          console.log(contact);
+          
+        }
+      }
+    }
+  }
+}
 
 envoiDuPanier.addEventListener("click", function (e) {
   e.preventDefault();
-  
 
-const contact = {
-    firstName: fName.value,
-    Name: lName.value,
-    adresse: adresse.value,
-    city: ville.value,
-    email: mail.value,
-  };
-
-  function checkInfo(){
-    if(regexLettersOnly.test(contact.firstName)==false){
-      alert("Le champs prénom est éronné");
-      console.log("erreur");
-    }else{
-      console.log(idProduit, contact);
-    }
-  }
-
- checkInfo(contact);
- getobjetID();
-  
-
-  
+  checkInfo(contact);
+  getobjetID();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // envoiDonnees = (objetRequest) => {
 //   return new Promise((resolve)=>{
