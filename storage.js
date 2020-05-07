@@ -85,12 +85,15 @@ let products = []; //init du tableau contenant les id des différents produits d
 let send
 
 function getObjetID() { //function pour récupérer tout les id produit du tableau html
-  products = []; // [re]mise à zero du array
+  products = []; // [re]mise à zero du tableau
   for (let i = 0; i < cart.length; i++) {
     products.push(cart[i][3]); // ajout des id dans le tableau products
   }
+  
 }
 getObjetID(); // appel de la fonction pour récupéré les id des produits
+
+JSON.parse(products[0]);
 
 let contact = { // création de l'objet contact
   firstName: "",
@@ -131,7 +134,8 @@ function checkFormInput() {// vérification de tout les champs un par un et ajou
           } else {
             contact.email = mail.value;
             send = {contact,products}
-            console.log(JSON.stringify(send));
+            console.log(typeof(send));
+            console.log(send);
             //lorsque tout est vérifié envoi des données au serveur
            fetch('http://localhost:3000/api/teddies/order', {
                 method: 'POST',
