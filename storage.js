@@ -1,103 +1,149 @@
 const numberEltCart = document.getElementById("number");
 const totalCart = document.getElementById("prixTotal");
-let table = document.getElementById("tableau");
-let newLigne = document.createElement("tr");
+const table = document.getElementById("tableau");
+const newLigne = document.createElement("tr");
 let newCol;
 let total = 0; //init d'un variable qui récupèrera la somme du tableau des prix
-
+const mainHtml = document.querySelector(".cart"); //main html
 /*****************/
 const cart = JSON.parse(localStorage.getItem("cart")); //récupération des elements dans le local storage
-numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur dans la navbar
+numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
 /*************/
-console.log("voici les product présents dans le panier " + cart);
 
-/**Creation du tableau**/
-for (let i = 0; i < cart.length; i++) {
-  let newLigne = document.createElement("tr"); //créer une nouvelle ligne
-  table.appendChild(newLigne); //ajoute la ligne au tableau
-  newLigne.className += "tableLine"; //donne la class tableLigne à ts les elements newligne
+if (cart.length < 1) {
+  //si le panier est vide
+  mainHtml.style.display = "none"; // ne pas afficher les elements tableau et formulaire
+  const cartEmpty = document.createElement("div"); // créer une DIV
+  cartEmpty.innerHTML =
+    "<h1>Votre panier est vide !<br>Retrouvez nos différents produits sur notre page d'accueil.</h1>"; // ajouter ce message en H1 à la div
+  cartEmpty.style.marginTop = "250px";
+  cartEmpty.style.lineHeight = "80px";
+  document.body.appendChild(cartEmpty); //Ajouter la div  au body.
+} else {
+  /**Creation du tableau si le panier comporte des éléments**/
+  for (let i = 0; i < cart.length; i++) {
+    let newLigne = document.createElement("tr"); //créer une nouvelle ligne
+    table.appendChild(newLigne); //ajoute la ligne au tableau
+    newLigne.className += "tableLine"; //donne la class tableLigne à ts les elements newligne
 
-  for (let j = 0; j < cart[i].length; j++) {
-    newCol = document.createElement("th"); //créer une nouvelle colonne;
-    newLigne.appendChild(newCol); //ajoute la colone à la ligne créer précedement
-    newCol.innerHTML = cart[i][j]; // ajoute les information  du array produit dans le array cart aux colonnes
+    for (let j = 0; j < cart[i].length; j++) {
+      newCol = document.createElement("th"); //créer une nouvelle colonne;
+      newLigne.appendChild(newCol); //ajoute la colone à la ligne créer précedement
+      newCol.innerHTML = cart[i][j]; // ajoute les information  du array produit dans le array cart aux colonnes
+    }
   }
-}
 
-/**creation d'un button remove et récupération des prix totaux / suppression de la colonne ID**/
-const line = document.getElementsByClassName("tableLine"); //pointe toutes les nouvelles lignes
-const totalPrice = []; //tableau vide pour ajout des prix par article
+  /**creation d'un button remove et récupération des prix totaux / suppression de la colonne ID**/
+  const line = document.getElementsByClassName("tableLine"); //pointe toutes les nouvelles lignes
+  const totalPrice = []; //tableau vide pour ajout des prix par article
 
-for (i = 0; i < line.length; i++) {
-  const btn = document.createElement("button"); //créer un bouton par nombre de ligne
-  btn.className += "btnLine"; //donne leur la classe btnLine
-  line[i].appendChild(btn); //pour chaque ligne donne un btn nouvellement créer
-  btn.innerHTML = "X";
+  for (i = 0; i < line.length; i++) {
+    const btn = document.createElement("button"); //créer un bouton par nombre de ligne
+    btn.className += "btnLine"; //donne leur la classe btnLine
+    line[i].appendChild(btn); //pour chaque ligne donne un btn nouvellement créer
+    btn.innerHTML = "X";
 
-  const allPrice = line[i].cells[2].textContent; //récupération des cellules contenant le prix de chaque article
-  const allID = line[i].cells[3]; //suppression de la colonne avec tous les ID produit visible, IDs uniquement présent dans le cart.
-  allID.style.display = "none";
-  totalPrice.push(parseFloat(allPrice)); // ajout des prix au tableau pour le total
-}
-for (let i = 0; i < totalPrice.length; i++) {
-  total += totalPrice[i]; //ajout de la somme des prix du array à total
-}
-totalCart.innerHTML =
-  total + " €" + "<br>Nombre d'articles dans le panier: " + cart.length;
+    const allPrice = line[i].cells[2].textContent; //récupération des cellules contenant le prix de chaque article
+    const allID = line[i].cells[3]; //suppression de la colonne avec tous les ID produit visible, IDs uniquement présent dans le cart.
+    allID.style.display = "none";
+    totalPrice.push(parseFloat(allPrice)); // ajout des prix au tableau pour le total
+  }
+  for (let i = 0; i < totalPrice.length; i++) {
+    total += totalPrice[i]; //ajout de la somme des prix du array à total
+  }
+  totalCart.innerHTML =
+    total + " €" + "<br>Nombre d'articles dans le panier: " + cart.length;
 
-/**ajout de la fonctionnalité suppression de la ligne lors du clock sur le btn remove**/
-const removeBtn = document.getElementsByClassName("btnLine"); //ajout d'un class à la list de btn
-for (let j = 0; j < removeBtn.length; j++) {
-  //pour chaque btn de list
-  removeBtn[j].addEventListener("click", function () {
-    cart.splice(j, 1); //supprime la ligne correspondante à l'index du btn
-    localStorage.setItem("cart", JSON.stringify(cart)); //envoi les info du cart au localstorage
-    location.reload(true); //rafraichi la page
-  });
+  /**ajout de la fonctionnalité suppression de la ligne lors du click sur le btn remove**/
+  const removeBtn = document.getElementsByClassName("btnLine"); //ajout d'un class à la list de btn
+  for (let j = 0; j < removeBtn.length; j++) {
+    //pour chaque btn de list
+    removeBtn[j].addEventListener("click", function () {
+      cart.splice(j, 1); //supprime la ligne correspondante à l'index du btn
+      localStorage.setItem("cart", JSON.stringify(cart)); //envoi les info du cart au localstorage
+      location.reload(true); //rafraichi la page
+    });
+  }
 }
 
 /***Elements form***/
 
-const firstName = document.getElementById("fname");
-const lastName = document.getElementById("lname");
-const adress = document.getElementById("adress");
-const city = document.getElementById("city");
-const email = document.getElementById("email");
+const fName = document.getElementById("fname");
+const lName = document.getElementById("lname");
+const adresse = document.getElementById("adress");
+const ville = document.getElementById("city");
+const mail = document.getElementById("email");
+
 const btnSubmit = document.getElementById("envoiDuPanier");
+const regexLettersOnly = /^[a-zA-Z]+$/
 
-// let contact={
-//   firstName: "" ,
-//   Name: "",
-//   adresse: "",
-//   city: "",
-//   email: "",
-// }
-const idProduit = [];
-let objet;
-
-
+let idProduit = []; //init du tableau contenant les id des différents produits dans le panier
 function getobjetID() {
+  idProduit = []; 
   for (let i = 0; i < cart.length; i++) {
     idProduit.push(cart[i][3]);
   }
 }
 
+
+
+
+
+
+
+
+
+
 envoiDuPanier.addEventListener("click", function (e) {
   e.preventDefault();
-  getobjetID();
-  const contact = {
-    firstName: firstName.value,
-    Name: lastName.value,
-    adresse: adress.value,
-    city: city.value,
-    email: email.value,
+  
+
+const contact = {
+    firstName: fName.value,
+    Name: lName.value,
+    adresse: adresse.value,
+    city: ville.value,
+    email: mail.value,
   };
-  objet = {
-    contact,
-    idProduit,
-  };
-  console.log(objet);
+
+  function checkInfo(){
+    if(regexLettersOnly.test(contact.firstName)==false){
+      alert("Le champs prénom est éronné");
+      console.log("erreur");
+    }else{
+      console.log(idProduit, contact);
+    }
+  }
+
+ checkInfo(contact);
+ getobjetID();
+  
+
+  
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // envoiDonnees = (objetRequest) => {
 //   return new Promise((resolve)=>{
