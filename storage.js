@@ -1,3 +1,5 @@
+
+
 const numberEltCart = document.getElementById("number");
 const totalCart = document.getElementById("prixTotal");
 const table = document.getElementById("tableau");
@@ -80,12 +82,12 @@ const regexEmail = /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1
 const regexAdress = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
 const regexCity = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
 
+let products; //init du tableau contenant les id des différents produits dans le panier
+let obj;
 
-let products = []; //init du tableau contenant les id des différents produits dans le panier
-let send
-
-function getObjetID() { //function pour récupérer tout les id produit du tableau html
-  products = []; // [re]mise à zero du tableau
+function getObjetID() {
+  //function pour récupérer tout les id produit du tableau html
+  products = []; // creation du array
   for (let i = 0; i < cart.length; i++) {
     products.push(cart[i][3]); // ajout des id dans le tableau products
   }
@@ -93,9 +95,10 @@ function getObjetID() { //function pour récupérer tout les id produit du table
 }
 getObjetID(); // appel de la fonction pour récupéré les id des produits
 
-JSON.parse(products[0]);
 
-let contact = { // création de l'objet contact
+
+let contact = {
+  // création de l'objet contact
   firstName: "",
   lastName: "",
   address: "",
@@ -103,7 +106,8 @@ let contact = { // création de l'objet contact
   email: "",
 };
 
-function checkFormInput() {// vérification de tout les champs un par un et ajout des valeurs au key de contact
+function checkFormInput() {
+  // vérification de tout les champs un par un et ajout des valeurs au key de contact
   if (regexLettersOnly.test(fName.value) == false) {
     //Regex prénom
     alert("Le champs prénom est éronné");
@@ -133,17 +137,39 @@ function checkFormInput() {// vérification de tout les champs un par un et ajou
             alert("Le champs Email est éronné");
           } else {
             contact.email = mail.value;
-            send = {contact,products}
-            console.log(typeof(send));
-            console.log(send);
+
+            obj = { contact, products };
+            let toSend = JSON.stringify(obj); // envoi de string au serveur
+
             //lorsque tout est vérifié envoi des données au serveur
-           fetch('http://localhost:3000/api/teddies/order', {
-                method: 'POST',
-                hearders:{
-                  'Content-type': 'application/json' //je t'envoi du json
-                },
-                body: JSON.stringify(send)
-              })
+            let request = new XMLHttpRequest();
+            
+            request.onload = function () {
+              if (this.readyState == XMLHttpRequest.DONE) {
+                response = JSON.parse(this.responseText);
+                let responseOrder;
+                responseOrder = response.orderId;
+                localStorage.setItem("orderId", JSON.stringify(responseOrder));// envoi du order id dans le local storage
+                
+              }
+            };
+
+            request.open("POST", "http://localhost:3000/api/teddies/order");
+            request.setRequestHeader("Content-Type", "application/json");
+            request.send(toSend);    
+            
+            let orderId = JSON.parse(localStorage.getItem("orderId"));
+            
+
+            mainHtml.style.display = "none"; // ne pas afficher les elements tableau et formulaire
+            const thanksCustomer = document.createElement("div"); // créer une DIV
+            thanksCustomer.innerHTML =
+              "<h1>Merci pour votre commande<br>Commande numéro : "+orderId+"</h1>"; // ajouter ce message en H1 à la div
+              thanksCustomer.style.marginTop = "250px";
+              thanksCustomer.style.lineHeight = "80px";
+              document.body.appendChild(thanksCustomer); //Ajouter la div  au body.
+              
+
           }
         }
       }
@@ -153,14 +179,7 @@ function checkFormInput() {// vérification de tout les champs un par un et ajou
 
 
 
-envoiDuPanier.addEventListener("click", function (e) {
+btnSubmit.addEventListener("click", function (e) {
   e.preventDefault();
   checkFormInput();
-  
 });
-
-
-
-
-
-
