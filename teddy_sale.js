@@ -37,16 +37,16 @@ fetch("http://localhost:3000/api/teddies/").then(function (response) {
       }
       //methode d'instances
       teddys() {
-        noSelection.style.display = "none";
-        title.innerHTML = this.name;
-        img.src = this.image;
-        img.style.display = "block";
-        description.innerHTML = this.description;
+        noSelection.style.display = "none";// enlever du dom le texte demandant la selection d'un ours
+        title.innerHTML = this.name; // ajout du nom de l'ours au dom
+        img.src = this.image; // ajout du chemin vers l'image de l'ours 
+        img.style.display = "block"; // ajout au dom de l'image
+        description.innerHTML = this.description; // ajout de la description de l'ours au dom
         id.innerHTML=this.id; // ajout de l'id pour recupération lors du POST
         id.style.display = "none";//ID masqué sur la page client
-        price.innerHTML = (this.price / 100).toFixed(2) + " €"; //divisé par 100, en gardant deux chiffres après la virgule
-        menu.style.display = "block";
-        divBtn.style.display = "block";
+        price.innerHTML = (this.price / 100).toFixed(2) + " €"; // ajout du prix divisé par 100, en gardant deux chiffres après la virgule
+        menu.style.display = "block"; // affichage du dropdown menu 
+        divBtn.style.display = "block"; // affichage du bouton "ajouter au panier"
 
         dropdown.options.length = 0; //(re) mise  à zero du tableau options, pour ne pas conserver les anciennes valeurs du présent lors de l'ancien click.
         let defaultOption = document.createElement("option"); //creation de l'option par default
@@ -111,7 +111,7 @@ fetch("http://localhost:3000/api/teddies/").then(function (response) {
         ours.teddys();
       });
     }
-    // appel de la fonction avec le nom de l'element du dom et le nom de la constante en paramètre.
+    // appel de la fonction avec le nom de l'element du dom et le nom de l'instance en paramètre.
     showTeddy(norb, norbert);
     showTeddy(arn, arnold);
     showTeddy(lennyNCarl, lennyAndCarl);
@@ -126,19 +126,18 @@ fetch("http://localhost:3000/api/teddies/").then(function (response) {
 if (localStorage.getItem("cart")) {
   //si le panier existe ne pas le créer et l'initialiser
 } else {
-  console.log("nouvel utilisateur, création du panier");
-  let panierInit = [];
-  localStorage.setItem("cart", JSON.stringify(panierInit));
+  let panierInit = []; // initialisation du panier
+  localStorage.setItem("cart", JSON.stringify(panierInit)); // ajout du apnier vide dans le local storage avec le nom de cart
 }
 
-let cart = JSON.parse(localStorage.getItem("cart")); // le pannier est créer et est un array le local storage recupère ses datas de cart
-numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur dans la navbar
+let cart = JSON.parse(localStorage.getItem("cart")); // le pannier est créer et est un array qui récupère ses datas du local storage
+numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
 
 
 //fonction ajoutant les produits dans le panier au click
 divBtn.addEventListener("click", function () {
   cart.push([title.textContent,dropdown.value,price.textContent,id.textContent]); // ajoute un new array avec ses elements
-  localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage
+  localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage depuis le array local
   numberEltCart.innerHTML = "(" + cart.length + ")"; //Ajout de l'element au compteur de la nav bar
 
   window.confirm; //modal de confirmation pour continuer ou non le shopping

@@ -1,4 +1,4 @@
-
+//elements du tableau html
 
 const numberEltCart = document.getElementById("number");
 const totalCart = document.getElementById("prixTotal");
@@ -7,10 +7,9 @@ const newLigne = document.createElement("tr");
 let newCol;
 let total = 0; //init d'un variable qui récupèrera la somme du tableau des prix
 const mainHtml = document.querySelector(".cart"); //main html
-/*****************/
+
 const cart = JSON.parse(localStorage.getItem("cart")); //récupération des elements dans le local storage
 numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
-/*************/
 
 if (cart.length < 1) {
   //si le panier est vide
@@ -31,11 +30,11 @@ if (cart.length < 1) {
     for (let j = 0; j < cart[i].length; j++) {
       newCol = document.createElement("th"); //créer une nouvelle colonne;
       newLigne.appendChild(newCol); //ajoute la colone à la ligne créer précedement
-      newCol.innerHTML = cart[i][j]; // ajoute les information  du array produit dans le array cart aux colonnes
+      newCol.innerHTML = cart[i][j]; // ajoute les information des array produit présent dans le array cart aux colonnes
     }
   }
 
-  /**creation d'un button remove et récupération des prix totaux / suppression de la colonne ID**/
+  /**creation d'un button remove /récupération des prix totaux / suppression de la colonne ID**/
   const line = document.getElementsByClassName("tableLine"); //pointe toutes les nouvelles lignes
   const totalPrice = []; //tableau vide pour ajout des prix par article
 
@@ -46,23 +45,25 @@ if (cart.length < 1) {
     btn.innerHTML = "X";
 
     const allPrice = line[i].cells[2].textContent; //récupération des cellules contenant le prix de chaque article
-    const allID = line[i].cells[3]; //suppression de la colonne avec tous les ID produit visible, IDs uniquement présent dans le cart.
-    allID.style.display = "none";
-    totalPrice.push(parseFloat(allPrice)); // ajout des prix au tableau pour le total
+    const allID = line[i].cells[3]; // récupération de toutes les cellules contenant les ID produits
+    allID.style.display = "none"; // suppresion de l'affichage des id produits
+
+    totalPrice.push(parseFloat(allPrice)); // ajout des prix au array pour le total
   }
   for (let i = 0; i < totalPrice.length; i++) {
-    total += totalPrice[i]; //ajout de la somme des prix du array à total
+    total += totalPrice[i]; //ajout de la somme des prix du array totalPrice à  la variable number total
   }
   totalCart.innerHTML =
-    total + " €" + "<br>Nombre d'articles dans le panier: " + cart.length;
+    total + " €" + "<br>Nombre d'articles dans le panier: " + cart.length; // affichage du nombre d'articles et leurs prix
 
   /**ajout de la fonctionnalité suppression de la ligne lors du click sur le btn remove**/
-  const removeBtn = document.getElementsByClassName("btnLine"); //ajout d'un class à la list de btn
+
+  const removeBtn = document.getElementsByClassName("btnLine"); //ajout d'une class à la list de btn
   for (let j = 0; j < removeBtn.length; j++) {
     //pour chaque btn de list
     removeBtn[j].addEventListener("click", function () {
       cart.splice(j, 1); //supprime la ligne correspondante à l'index du btn
-      localStorage.setItem("cart", JSON.stringify(cart)); //envoi les info du cart au localstorage
+      localStorage.setItem("cart", JSON.stringify(cart)); //envoi les info du array cart au localstorage
       location.reload(true); //rafraichi la page
     });
   }
@@ -77,28 +78,26 @@ const ville = document.getElementById("city");
 const mail = document.getElementById("email");
 
 const btnSubmit = document.getElementById("envoiDuPanier");
+
 const regexLettersOnly = /^[a-zA-Z]+$/;
 const regexEmail = /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@{[a-zA-Z0-9_\-\.]+0\.([a-zA-Z]{2,5}){1,25})+)*$/;
 const regexAdress = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
 const regexCity = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
 
-let products; //init du tableau contenant les id des différents produits dans le panier
-let obj;
 
+let obj; //init de l'objet qui sera transformé en string avant envoi
+
+let products; //init du array qui contiendra les id des différents produits du panier et qui sera ajout à la varibale obj avant transformation en string
 function getObjetID() {
-  //function pour récupérer tout les id produit du tableau html
-  products = []; // creation du array
+  //function pour récupérer tout les id produit array cart
+  products = []; // creation du array contenant les ids
   for (let i = 0; i < cart.length; i++) {
-    products.push(cart[i][3]); // ajout des id dans le tableau products
+    products.push(cart[i][3]); // ajout des id dans le array products
   }
-  
 }
-getObjetID(); // appel de la fonction pour récupéré les id des produits
 
-
-
+// création de l'objet contact qui sera ajout à la varibale obj avant transformation en string
 let contact = {
-  // création de l'objet contact
   firstName: "",
   lastName: "",
   address: "",
@@ -107,7 +106,7 @@ let contact = {
 };
 
 function checkFormInput() {
-  // vérification de tout les champs un par un et ajout des valeurs au key de contact
+  // vérification de tout les champs par étape et ajout des valeurs au key de contact
   if (regexLettersOnly.test(fName.value) == false) {
     //Regex prénom
     alert("Le champs prénom est éronné");
@@ -138,46 +137,50 @@ function checkFormInput() {
           } else {
             contact.email = mail.value;
 
-            obj = { contact, products };
-            let toSend = JSON.stringify(obj); // envoi de string au serveur
+            // quand tous les champs du formulaire sont validés-->
 
-            //lorsque tout est vérifié envoi des données au serveur
-            let request = new XMLHttpRequest();
-            
+            getObjetID(); // appel de la fonction pour récupéré les id des produits
+
+            obj = { contact, products }; // ajout de contact et produits à la varible obj.
+            const toSend = JSON.stringify(obj); // transformation en string pour envoi JSON serveur
+
+            // envoi des données au serveur
+            const request = new XMLHttpRequest();
+
             request.onload = function () {
               if (this.readyState == XMLHttpRequest.DONE) {
-                response = JSON.parse(this.responseText);
+                response = JSON.parse(this.responseText); // récupération de la reponse serveur
                 let responseOrder;
-                responseOrder = response.orderId;
-                localStorage.setItem("orderId", JSON.stringify(responseOrder));// envoi du order id dans le local storage
-                
+                responseOrder = response.orderId; //l'order Id à afficher
+
+                mainHtml.style.display = "none"; // ne plus afficher les elements tableau et formulaire
+                const thanksCustomer = document.createElement("div"); // créer une DIV
+                thanksCustomer.innerHTML =
+                  "<h1>Merci pour votre commande " +
+                  contact.firstName +
+                  "<br>Commande numéro : " +
+                  responseOrder +
+                  "</h1>"; // ajouter ce message en H1 à la div
+                thanksCustomer.style.marginTop = "250px";
+                thanksCustomer.style.lineHeight = "80px";
+                document.body.appendChild(thanksCustomer); //Ajouter la div  au body.
               }
             };
 
             request.open("POST", "http://localhost:3000/api/teddies/order");
             request.setRequestHeader("Content-Type", "application/json");
-            request.send(toSend);    
-            
-            let orderId = JSON.parse(localStorage.getItem("orderId"));
-            
+            request.send(toSend); //envoi de l'objet contact / produits
 
-            mainHtml.style.display = "none"; // ne pas afficher les elements tableau et formulaire
-            const thanksCustomer = document.createElement("div"); // créer une DIV
-            thanksCustomer.innerHTML =
-              "<h1>Merci pour votre commande<br>Commande numéro : "+orderId+"</h1>"; // ajouter ce message en H1 à la div
-              thanksCustomer.style.marginTop = "250px";
-              thanksCustomer.style.lineHeight = "80px";
-              document.body.appendChild(thanksCustomer); //Ajouter la div  au body.
-              
-
+            setTimeout(function () {
+              localStorage.clear(); // le panier redevient vide.
+              window.location.href = "index.html"; // renvoi vers la page d'accueil
+            }, 7000);
           }
         }
       }
     }
   }
 }
-
-
 
 btnSubmit.addEventListener("click", function (e) {
   e.preventDefault();
