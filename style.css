@@ -261,6 +261,8 @@ p {
  
 }
 .cart #cartForm input{
+  border: 1px solid #333;
+  
   margin-bottom: 20px;
   width: 40%;
   height: 25px;

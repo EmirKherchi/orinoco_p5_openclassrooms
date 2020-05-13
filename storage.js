@@ -84,7 +84,6 @@ const regexEmail = /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1
 const regexAdress = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
 const regexCity = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
 
-
 let obj; //init de l'objet qui sera transformé en string avant envoi
 
 let products; //init du array qui contiendra les id des différents produits du panier et qui sera ajout à la varibale obj avant transformation en string
@@ -109,32 +108,42 @@ function checkFormInput() {
   // vérification de tout les champs par étape et ajout des valeurs au key de contact
   if (regexLettersOnly.test(fName.value) == false) {
     //Regex prénom
-    alert("Le champs prénom est éronné");
+    fName.style.backgroundColor = "#ffc0cb";
+    alert("Veuillez informer votre prénom");
   } else {
     contact.firstName = fName.value;
+    fName.style.backgroundColor = "#bcf5bc";
 
     if (regexLettersOnly.test(lName.value) == false) {
       //Regex nom
-      alert("Le champs nom est éronné");
+      lName.style.backgroundColor = "#ffc0cb";
+      alert("Veuillez informer votre nom");
     } else {
+      lName.style.backgroundColor = "#bcf5bc";
       contact.lastName = lName.value;
 
       if (regexAdress.test(adresse.value) == false) {
         //Regex adresse
-        alert("Le champs adresse est éronné");
+        adresse.style.backgroundColor = "#ffc0cb";
+        alert("Veuillez informer votre adresse");
       } else {
+        adresse.style.backgroundColor = "#bcf5bc";
         contact.address = adresse.value;
 
         if (regexCity.test(ville.value) == false) {
           //Regex ville
-          alert("Le champs ville est éronné");
+          ville.style.backgroundColor = "#ffc0cb";
+          alert("Veuillez informer votre ville");
         } else {
+          ville.style.backgroundColor = "#bcf5bc";
           contact.city = ville.value;
 
           if (regexEmail.test(mail.value) == false) {
             //Regex nom
-            alert("Le champs Email est éronné");
+            mail.style.backgroundColor = "#ffc0cb";
+            alert("Veuillez informer votre adresse e-mail");
           } else {
+            mail.style.backgroundColor = "#bcf5bc";
             contact.email = mail.value;
 
             // quand tous les champs du formulaire sont validés-->
