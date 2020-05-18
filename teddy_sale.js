@@ -106,7 +106,7 @@ fetch("http://localhost:3000/api/teddies/").then(function (response) {
     );
 
     // mise en place des evenements avec appel de la method teddys dans une fonction showTeddy.
-    function showTeddy(eltNav, ours) {
+    const showTeddy = (eltNav, ours) => {
       eltNav.addEventListener("click", function () {
         ours.teddys();
       });
@@ -120,7 +120,7 @@ fetch("http://localhost:3000/api/teddies/").then(function (response) {
   });
 });
 
-/******LE PANIER******/
+/****** init LE PANIER******/
 
 //creation ou appel du panier client
 if (localStorage.getItem("cart")) {

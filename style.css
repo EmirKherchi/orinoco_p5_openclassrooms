@@ -3,282 +3,53 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-*,
-html {
-  margin: 0;
-  padding: 0;
+a :hover {
+  text-decoration: none;
 }
 
-/*Navbar header & footer*/
+/** header **/
 
-header ul {
-  list-style-type: none;
-  overflow: hidden;
-  background-color: #333;
-  padding-left: 32%;
+header .fas {
+  margin-left: 50%;
+  margin-right: 10px;
 }
 
-header #logo {
-  right: 30%;
-  position: relative;
-}
-header #number{
+header #number {
   font-size: 15px;
   padding-left: 10px;
 }
 
-.fa-shopping-cart {
-  padding-right: 8px;
+header .navbar-nav {
+  margin-left: 25%;
 }
-footer nav {
+
+/** Footer**/
+
+footer {
   position: fixed;
   bottom: 0;
-  
   width: 100%;
+}
+
+footer .navbar-nav {
+  margin: auto;
   text-align: center;
 }
 
-header li,
-footer li {
-  display: inline-block;
-  font-size: 20px;
-  padding-right: 15px;
-}
-footer ul {
-  list-style-type: none;
-  overflow: hidden;
-  background-color: #333;
+/** Product home page **/
+
+.products-items {
+  margin: 225px 0;
+  border: 25px solid transparent;
+  padding: 5%;
 }
 
-header li a,
-footer li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
+.products div i {
+  margin-top: 100px;
+  font-size: 50px;
+}
+
+.products a {
+  color: #000;
   text-decoration: none;
 }
-
-header li a:hover,
-footer li a:hover {
-  background-color: #111;
-}
-
-header #logo a:hover {
-  background-color: transparent;
-}
-
-
-/*Home page*/
-
-.products{
-    display: flex;
-    flex-direction: col;
-    flex: wrap;
-    align-content: center;
-    align-items: center;
-    align-content: center;
-}
-.products, div{
-    text-align: center;
-    margin: auto;
-}
-.products div {
-    margin-top: 225px;
-    border: 1px solid #333;
-    text-align: center;
-    padding: 5%;
-}
-.products div i {
-    margin-top: 100px;
-    font-size: 50px;
-}
-
-.products a{
-    color: #000;
-    text-decoration: none;
-    display: block;
-    margin: auto;
-    
-}
-
-/*Teddy_Sale*/
-.teddy {
-  display: flex;
-  flex-direction: row;
-  flex: wrap;
-  align-content: center;
-}
-aside {
-  position: fixed;
-  background-color: #eee;
-  height: 100%;
-}
-.teddys_display {
-  display: block;
-  margin: auto;
-}
-.teddy h1,
-p {
-  text-align: center;
-  margin-bottom: 5%;
-}
-.teddy #description{
-  margin-top: 25px;
-  text-align: left;
-}
-
-.teddy img {
-  margin: auto;
-  width: 450px;
-  display: none;
-}
-.teddy #product {
-  margin-top: 100px;
-  margin-left: 20%;
-}
-
-.teddy ul {
-  margin-top: 60px;
-}
-.teddy li {
-  font-size: 18px;
-  font-weight: 300;
-  list-style: none;
-  cursor: pointer;
-  margin-right: 10px;
-  margin-left: 25px;
-  padding-top: 10%;
-  width: 200px;
-}
-.teddy li:hover {
-  font-weight: 600;
-}
-
-.teddy #choose-color {
-  text-align: center;
-  display: none;
-}
-#no-selection{
-    margin-top: 180px;
-}
-
-.teddy select{
-    background-color: #333; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 22px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-.teddy #btn{
-    display: none;
-}
-
-.teddy #btn button{
-    background-color: #333; /* Green */
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-    transition: 300ms ease;
-}
-
-.teddy #btn button:hover{
-    color:#333;
-    background-color: #fff;
-    border: solid 1px #333;
-}
-
-
-
-/*Page Panier*/
-
-.cart h1{
-  text-align: center;
-  padding-top: 50px;
-}
-.cart #tableau{
-  margin: auto;
-  width: 40%;
-  margin-top: 100px;
-  
-  
-}
-.cart #tableau #tblEntry{
-  height: 50px;
-  padding: 0;
-  color: #fff;
-  background-color: #333;
-}
-
-.cart th{
-  padding-bottom: 20px;
-  font-size: 16px;
-  height: 50px;
-}
-
-.btnLine{
-  background-color: #333; /* Green */
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 10px; 
-    cursor: pointer;
-    transition: 100ms ease;
-    margin-top: 15px;
-}
-.btnLine:hover{
-  background-color: rgb(206, 59, 59);
-}
-
-.cart #total{
-  margin-top: 70px;
-
-} 
-
-.cart #cartForm{
- margin-top: 100px;
- margin-bottom: 200px;
- 
-}
-.cart #cartForm form{
-  font-weight: 600;
- 
- 
-}
-.cart #cartForm input{
-  border: 1px solid #333;
-  
-  margin-bottom: 20px;
-  width: 40%;
-  height: 25px;
-}
-
- #envoiDuPanier {
-  background-color: #333; /* Green */
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 20px;
-    margin-top: 30px;
-    transition: 300ms ease;    
-}
-
- #envoiDuPanier:hover{
-  color:#333;
-  background-color: #fff;
-  border: solid 1px #333;}

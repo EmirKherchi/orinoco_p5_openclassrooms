@@ -87,7 +87,7 @@ const regexCity = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
 let obj; //init de l'objet qui sera transformé en string avant envoi
 
 let products; //init du array qui contiendra les id des différents produits du panier et qui sera ajout à la varibale obj avant transformation en string
-function getObjetID() {
+const getObjetID = () => {
   //function pour récupérer tout les id produit array cart
   products = []; // creation du array contenant les ids
   for (let i = 0; i < cart.length; i++) {
@@ -104,7 +104,7 @@ let contact = {
   email: "",
 };
 
-function checkFormInput() {
+const checkFormInput = () => {
   // vérification de tout les champs par étape et ajout des valeurs au key de contact
   if (regexLettersOnly.test(fName.value) == false) {
     //Regex prénom
