@@ -36,7 +36,7 @@ footer .navbar-nav {
   text-align: center;
 }
 
-/** Product home page **/
+/** home page **/
 
 .products-items {
   margin: 225px 0;
@@ -52,4 +52,166 @@ footer .navbar-nav {
 .products a {
   color: #000;
   text-decoration: none;
+}
+
+/** Teddies page **/
+.teddy {
+  background-color: rgb(46, 78, 78);
+}
+.teddys_display {
+  background-color: #fff;
+  padding-bottom: 150px;
+  padding-top: 110px;
+}
+
+.teddy h1,
+p {
+  margin-bottom: 5%;
+}
+
+.teddy img {
+  margin: auto;
+  width: 250px;
+  display: none;
+}
+
+.teddy #description {
+  margin-top: 25px;
+}
+
+.price {
+  font-weight: 900;
+  color: rgb(46, 78, 78);
+}
+
+aside {
+  color: #ccc;
+}
+.teddy ul {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding-inline-start: 0px;
+  padding: 0;
+}
+.teddy li {
+  font-size: 18px;
+  font-weight: 300;
+  list-style: none;
+  cursor: pointer;
+}
+.teddy li:hover {
+  font-weight: 600;
+}
+
+.teddy #choose-color {
+  display: none;
+}
+#no-selection {
+  margin-top: 180px;
+}
+
+.teddy select {
+  background-color: rgb(46, 78, 78); /* Green */
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.teddy #btn {
+  display: none;
+}
+
+.teddy #btn button {
+  background-color: rgb(46, 78, 78); /* Green */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 300ms ease;
+}
+
+.teddy #btn button:hover {
+  color: #333;
+  background-color: #fff;
+  border: solid 1px #333;
+}
+
+/** Cart **/
+
+.cart h1 {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.cart #tableau {
+  margin: auto;
+  width: 50%;
+  margin-top: 100px;
+}
+.cart #tableau #tblEntry {
+  height: 50px;
+  padding: 0;
+  color: #fff;
+  background-color: rgb(46, 78, 78);
+}
+
+.cart th {
+  padding-bottom: 20px;
+  font-size: 16px;
+  height: 50px;
+}
+
+.btnLine {
+  background-color: rgb(46, 78, 78); /* Green */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 10px;
+  cursor: pointer;
+  transition: 100ms ease;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+.btnLine:hover {
+  background-color: rgb(206, 59, 59);
+}
+
+.cart #total {
+  margin-top: 70px;
+}
+
+.cart #cartForm {
+  margin-top: 100px;
+  margin-bottom: 200px;
+}
+.cart #cartForm form {
+  font-weight: 600;
+}
+
+#envoiDuPanier {
+  background-color: rgb(46, 78, 78); /* Green */
+  color: white;
+  font-size: 20px;
+  margin-top: 30px;
+  transition: 300ms ease;
+}
+
+#envoiDuPanier:hover {
+  color: #333;
+  background-color: #fff;
+  border: solid 1px #333;
 }

@@ -42,12 +42,12 @@
         </nav>
     </header>
 
-    <main class="cart">
+    <main class="cart container-fluid text-center">
         <div>
             <h1>Panier</h1>
         </div>
         <div>
-            <table id="tableau">
+            <table class="table" id="tableau">
                 <tbody>
                     <tr id="tblEntry">
                         <th>Article</th>
@@ -57,28 +57,37 @@
                 </tbody>
             </table>
         </div>
-        <div id="total">
-            <h3>Prix total du panier : <span id="prixTotal"></span></h3>
+        <div class="container text-center" id="total">
+            <h4>Prix total du panier : <span id="prixTotal"></span></h4>
         </div>
 
-        <div id="cartForm">
-            <form action="storage.js" method="post">
-                <label for="fname">Prénom:</label><br>
-                <input type="text" id="fname" name="fname" placeholder="prénom" required><br>
+        <div class="container text-center" id="cartForm">
+            <form>
+                <div class="form-group">
+                    <label for="fname">Prénom:</label>
+                    <input type="text" class="form-control" id="fname" name="fname" placeholder="Prénom" required>
+                </div>
 
-                <label for="lname">Nom:</label><br>
-                <input type="text" id="lname" name="lname" placeholder="nom" required><br>
+                <div class="form-group"> <label for="lname">Nom:</label>
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Nom" required>
+                </div>
+                <div class="form-group"><label for="adress">Adresse:</label>
+                    <input type="text" class="form-control" id="adress" name="adress" placeholder="Adresse"
+                        required><br>
+                </div>
+                <div class="form-group"> <label for="city">ville:</label>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="Ville" required><br>
+                </div>
+                <div class="form-group"> <label for="email">E-mail:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required><br>
+                </div>
 
-                <label for="adress">Adresse:</label><br>
-                <input type="text" id="adress" name="adress" placeholder="adresse" required><br>
 
-                <label for="city">ville:</label><br>
-                <input type="text" id="city" name="city" placeholder="ville" required><br>
 
-                <label for="email">E-mail:</label><br>
-                <input type="email" id="email" name="email" placeholder="e-mail" required><br>
 
-                <input type="submit" id="envoiDuPanier" value="Valider votre commande">
+
+
+                <button class="btn btn-primary" type="submit" id="envoiDuPanier"> Valider votre commande</button>
             </form>
         </div>
 
@@ -93,14 +102,14 @@
         <footer>
             <nav class="navbar navbar-dark bg-dark">
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="#">Mentions légales</a>
-                    <a class="nav-item nav-link" href="cart.html">Contact</a>
 
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="#">Mentions légales</a>
+                        <a class="nav-item nav-link" href="cart.html">Contact</a>
+
+                    </div>
                 </div>
-                </div>
-        </nav>
+            </nav>
         </footer>
 
 

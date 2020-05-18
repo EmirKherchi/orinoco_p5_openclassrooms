@@ -19,6 +19,7 @@ if (cart.length < 1) {
     "<h1>Votre panier est vide !<br>Retrouvez nos différents produits sur notre page d'accueil.</h1>"; // ajouter ce message en H1 à la div
   cartEmpty.style.marginTop = "250px";
   cartEmpty.style.lineHeight = "80px";
+  cartEmpty.style.textAlign = "center";
   document.body.appendChild(cartEmpty); //Ajouter la div  au body.
 } else {
   /**Creation du tableau si le panier comporte des éléments**/
@@ -172,6 +173,7 @@ const checkFormInput = () => {
                   "</h1>"; // ajouter ce message en H1 à la div
                 thanksCustomer.style.marginTop = "250px";
                 thanksCustomer.style.lineHeight = "80px";
+                thanksCustomer.style.textAlign = "center";
                 document.body.appendChild(thanksCustomer); //Ajouter la div  au body.
               }
             };

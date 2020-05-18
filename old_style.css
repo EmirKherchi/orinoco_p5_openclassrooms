@@ -9,30 +9,15 @@
   flex: wrap;
   align-content: center;
 }
-aside {
-  position: fixed;
-  background-color: #eee;
-  height: 100%;
-}
-.teddys_display {
-  display: block;
-  margin: auto;
-}
-.teddy h1,
-p {
-  text-align: center;
-  margin-bottom: 5%;
-}
+
+
+
 .teddy #description{
   margin-top: 25px;
   text-align: left;
 }
 
-.teddy img {
-  margin: auto;
-  width: 450px;
-  display: none;
-}
+
 .teddy #product {
   margin-top: 100px;
   margin-left: 20%;
@@ -94,91 +79,9 @@ p {
     transition: 300ms ease;
 }
 
-.teddy #btn button:hover{
-    color:#333;
-    background-color: #fff;
-    border: solid 1px #333;
-}
+
 
 
 
 /*Page Panier*/
 
-.cart h1{
-  text-align: center;
-  padding-top: 50px;
-}
-.cart #tableau{
-  margin: auto;
-  width: 40%;
-  margin-top: 100px;
-  
-  
-}
-.cart #tableau #tblEntry{
-  height: 50px;
-  padding: 0;
-  color: #fff;
-  background-color: #333;
-}
-
-.cart th{
-  padding-bottom: 20px;
-  font-size: 16px;
-  height: 50px;
-}
-
-.btnLine{
-  background-color: #333; /* Green */
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 10px; 
-    cursor: pointer;
-    transition: 100ms ease;
-    margin-top: 15px;
-}
-.btnLine:hover{
-  background-color: rgb(206, 59, 59);
-}
-
-.cart #total{
-  margin-top: 70px;
-
-} 
-
-.cart #cartForm{
- margin-top: 100px;
- margin-bottom: 200px;
- 
-}
-.cart #cartForm form{
-  font-weight: 600;
- 
- 
-}
-.cart #cartForm input{
-  border: 1px solid #333;
-  
-  margin-bottom: 20px;
-  width: 40%;
-  height: 25px;
-}
-
- #envoiDuPanier {
-  background-color: #333; /* Green */
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 20px;
-    margin-top: 30px;
-    transition: 300ms ease;    
-}
-
- #envoiDuPanier:hover{
-  color:#333;
-  background-color: #fff;
-  border: solid 1px #333;}
