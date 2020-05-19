@@ -6,7 +6,7 @@ const description = document.getElementById("description");
 const price = document.getElementById("price");
 const divBtn = document.getElementById("btn"); //div contenant le btn
 const numberEltCart = document.getElementById("number");
-const id = document.getElementById("id")
+const id = document.getElementById("id");
 
 //elements menu de personalisation
 const menu = document.getElementById("choose-color");
@@ -37,13 +37,13 @@ fetch("http://localhost:3000/api/teddies/").then(function (response) {
       //methode d'instances
       teddys() {
         title.innerHTML = this.name; // ajout du nom de l'ours au dom
-        img.src = this.image; // ajout du chemin vers l'image de l'ours 
+        img.src = this.image; // ajout du chemin vers l'image de l'ours
         img.style.display = "block"; // ajout au dom de l'image
         description.innerHTML = this.description; // ajout de la description de l'ours au dom
-        id.innerHTML=this.id; // ajout de l'id pour recupération lors du POST
-        id.style.display = "none";//ID masqué sur la page client
+        id.innerHTML = this.id; // ajout de l'id pour recupération lors du POST
+        id.style.display = "none"; //ID masqué sur la page client
         price.innerHTML = (this.price / 100).toFixed(2) + " €"; // ajout du prix divisé par 100, en gardant deux chiffres après la virgule
-        menu.style.display = "block"; // affichage du dropdown menu 
+        menu.style.display = "block"; // affichage du dropdown menu
         divBtn.style.display = "block"; // affichage du bouton "ajouter au panier"
 
         dropdown.options.length = 0; //(re) mise  à zero du tableau options, pour ne pas conserver les anciennes valeurs du présent lors de l'ancien click.
@@ -108,7 +108,7 @@ fetch("http://localhost:3000/api/teddies/").then(function (response) {
       eltNav.addEventListener("click", function () {
         ours.teddys();
       });
-    }
+    };
     // appel de la fonction avec le nom de l'element du dom et le nom de l'instance en paramètre.
     showTeddy(norb, norbert);
     showTeddy(arn, arnold);
@@ -131,18 +131,25 @@ if (localStorage.getItem("cart")) {
 let cart = JSON.parse(localStorage.getItem("cart")); // le pannier est créer et est un array qui récupère ses datas du local storage
 numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
 
-
 //fonction ajoutant les produits dans le panier au click
 divBtn.addEventListener("click", function () {
-  cart.push([title.textContent,dropdown.value,price.textContent,id.textContent]); // ajoute un new array avec ses elements
-  localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage depuis le array local
-  numberEltCart.innerHTML = "(" + cart.length + ")"; //Ajout de l'element au compteur de la nav bar
-
-  window.confirm; //modal de confirmation pour continuer ou non le shopping
-  if (confirm("Voulez-vous voir votre panier ?")) {
-    window.location.href = "cart.html";
+  if (dropdown.value === "Personalisez votre ourson") { // si le choix de couleurs de l'ourson n'est pas défini pas d'envoi au panier et alert pour qu'il soit défnini.
+    alert("Veuillez Choisir la couleur de votre ours en peluche");
   } else {
-    //reste sur la page produit
+    cart.push([
+      title.textContent,
+      dropdown.value,
+      price.textContent,
+      id.textContent,
+    ]); // ajoute un new array avec ses elements
+    localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage depuis le array local
+    numberEltCart.innerHTML = "(" + cart.length + ")"; //Ajout de l'element au compteur de la nav bar
+
+    window.confirm; //modal de confirmation pour continuer ou non le shopping
+    if (confirm("Voulez-vous voir votre panier ?")) {
+      window.location.href = "cart.html";
+    } else {
+      //reste sur la page produit
+    }
   }
 });
-
