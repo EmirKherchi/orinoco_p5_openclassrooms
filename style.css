@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 body {
   margin: 0;
   padding: 0;
@@ -17,6 +24,7 @@ header .fas {
 header #number {
   font-size: 15px;
   padding-left: 10px;
+  color: #fff;
 }
 
 header .navbar-nav {
@@ -90,7 +98,6 @@ aside {
 .teddy ul {
   margin-top: 100px;
   margin-bottom: 100px;
-  padding-inline-start: 0px;
   padding: 0;
 }
 .teddy li {
@@ -138,6 +145,8 @@ aside {
   font-size: 16px;
   margin-top: 20px;
   cursor: pointer;
+  -webkit-transition: 300ms ease;
+  -o-transition: 300ms ease;
   transition: 300ms ease;
 }
 
@@ -179,9 +188,10 @@ aside {
   color: white;
   padding: 5px 10px;
   text-align: center;
-  text-decoration: none;
   font-size: 10px;
   cursor: pointer;
+  -webkit-transition: 100ms ease;
+  -o-transition: 100ms ease;
   transition: 100ms ease;
   margin-top: 15px;
   margin-left: 25px;
@@ -207,6 +217,8 @@ aside {
   color: white;
   font-size: 20px;
   margin-top: 30px;
+  -webkit-transition: 300ms ease;
+  -o-transition: 300ms ease;
   transition: 300ms ease;
 }
 

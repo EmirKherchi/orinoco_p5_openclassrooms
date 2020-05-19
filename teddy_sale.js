@@ -4,7 +4,6 @@ const title = document.getElementById("title");
 const img = document.getElementById("image");
 const description = document.getElementById("description");
 const price = document.getElementById("price");
-const noSelection = document.getElementById("no-selection");
 const divBtn = document.getElementById("btn"); //div contenant le btn
 const numberEltCart = document.getElementById("number");
 const id = document.getElementById("id")
@@ -37,7 +36,6 @@ fetch("http://localhost:3000/api/teddies/").then(function (response) {
       }
       //methode d'instances
       teddys() {
-        noSelection.style.display = "none";// enlever du dom le texte demandant la selection d'un ours
         title.innerHTML = this.name; // ajout du nom de l'ours au dom
         img.src = this.image; // ajout du chemin vers l'image de l'ours 
         img.style.display = "block"; // ajout au dom de l'image
