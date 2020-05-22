@@ -13,10 +13,11 @@ const cart = JSON.parse(localStorage.getItem("cart")); //récupération des elem
 
 if (cart === null || cart.length < 1) {
   //si le panier est vide
+  numberEltCart.innerHTML = "(0)";
   mainHtml.style.display = "none"; // ne pas afficher les elements tableau et formulaire
   const cartEmpty = document.createElement("div"); // créer une DIV
   cartEmpty.innerHTML =
-    "<h1>Votre panier est vide !<br>Retrouvez nos différents produits sur notre page d'accueil.</h1>"; // ajouter ce message en H1 à la div
+    "<h1>Oups...</h1><br><h3>Votre panier est vide !<br>Retrouvez nos différents produits sur notre page d'accueil.</h3>"; // ajouter ce message en H1 à la div
   cartEmpty.style.marginTop = "250px";
   cartEmpty.style.lineHeight = "80px";
   cartEmpty.style.textAlign = "center";
@@ -24,6 +25,8 @@ if (cart === null || cart.length < 1) {
 } else {
   //si le panier n'est pas vide
   numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
+
+
   /**Creation du tableau si le panier comporte des éléments**/
   for (let i = 0; i < cart.length; i++) {
     let newLigne = document.createElement("tr"); //créer une nouvelle ligne
@@ -153,7 +156,7 @@ const checkFormInput = () => {
 
             getObjetID(); // appel de la fonction pour récupéré les id des produits
 
-            obj = { contact, products }; // ajout de contact et produits à la varible obj.
+            obj = { contact, products }; // ajout de contact et produits à l'objet obj.
             const toSend = JSON.stringify(obj); // transformation en string pour envoi JSON serveur
 
             // envoi des données au serveur
@@ -174,13 +177,13 @@ const checkFormInput = () => {
                   responseOrder +
                   "<br>Vous allez être redirigé vers la page d'accueil d'ici quelques secondes";
 
-                // ajouter ce message en H1 à la div
+                // ajouter ce message à la div
 
                 thanksCustomer.style.marginTop = "100px";
                 thanksCustomer.style.fontSize = "20px";
                 thanksCustomer.style.textAlign = "center";
-                document.body.appendChild(thanksCustomer); //Ajouter la div  au body.
-                loadingSpinner.style.display = "inline-block"; // ajout de l'animation loading spinner
+                document.body.insertBefore(thanksCustomer,loadingSpinner); //Ajouter la div thanksCustomer avant loading spinner sur le body.
+                loadingSpinner.style.display = "inline-block"; // ajout de l'animation loading
               }
             };
 
@@ -190,9 +193,9 @@ const checkFormInput = () => {
 
             localStorage.clear(); // le panier redevient vide.
 
-            // setTimeout(() => {
-            //   window.location.href = "index.html"; // renvoi vers la page d'accueil
-            // }, 7000);
+            setTimeout(() => {
+              window.location.href = "index.html"; // renvoi vers la page d'accueil
+            }, 5000);
           }
         }
       }
