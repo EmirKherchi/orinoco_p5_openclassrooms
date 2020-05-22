@@ -4,7 +4,8 @@ const title = document.getElementById("title");
 const img = document.getElementById("image");
 const description = document.getElementById("description");
 const price = document.getElementById("price");
-const divBtn = document.getElementById("btn"); //div contenant le btn
+const divBtn = document.getElementById("divBtn"); //div contenant le btn
+const btnAddToCart = document.getElementById("btn");
 const numberEltCart = document.getElementById("number");
 const id = document.getElementById("id");
 
@@ -132,7 +133,7 @@ let cart = JSON.parse(localStorage.getItem("cart")); // le pannier est créer et
 numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
 
 //fonction ajoutant les produits dans le panier au click
-divBtn.addEventListener("click", function () {
+btnAddToCart.addEventListener("click", function () {
   if (dropdown.value === "Personalisez votre ourson") { // si le choix de couleurs de l'ourson n'est pas défini pas d'envoi au panier et alert pour qu'il soit défnini.
     alert("Veuillez Choisir la couleur de votre ours en peluche");
   } else {
@@ -149,7 +150,7 @@ divBtn.addEventListener("click", function () {
     if (confirm("Voulez-vous voir votre panier ?")) {
       window.location.href = "cart.html";
     } else {
-      //reste sur la page produit
+      // reste sur la page.
     }
   }
 });

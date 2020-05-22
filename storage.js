@@ -7,11 +7,11 @@ const newLigne = document.createElement("tr");
 let newCol;
 let total = 0; //init d'un variable qui récupèrera la somme du tableau des prix
 const mainHtml = document.querySelector(".cart"); //main html
+const loadingSpinner = document.querySelector(".lds-spinner");
 
 const cart = JSON.parse(localStorage.getItem("cart")); //récupération des elements dans le local storage
-numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
 
-if (cart.length < 1) {
+if (cart === null || cart.length < 1) {
   //si le panier est vide
   mainHtml.style.display = "none"; // ne pas afficher les elements tableau et formulaire
   const cartEmpty = document.createElement("div"); // créer une DIV
@@ -22,6 +22,8 @@ if (cart.length < 1) {
   cartEmpty.style.textAlign = "center";
   document.body.appendChild(cartEmpty); //Ajouter la div  au body.
 } else {
+  //si le panier n'est pas vide
+  numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
   /**Creation du tableau si le panier comporte des éléments**/
   for (let i = 0; i < cart.length; i++) {
     let newLigne = document.createElement("tr"); //créer une nouvelle ligne
@@ -94,7 +96,7 @@ const getObjetID = () => {
   for (let i = 0; i < cart.length; i++) {
     products.push(cart[i][3]); // ajout des id dans le array products
   }
-}
+};
 
 // création de l'objet contact qui sera ajout à la varibale obj avant transformation en string
 let contact = {
@@ -166,15 +168,19 @@ const checkFormInput = () => {
                 mainHtml.style.display = "none"; // ne plus afficher les elements tableau et formulaire
                 const thanksCustomer = document.createElement("div"); // créer une DIV
                 thanksCustomer.innerHTML =
-                  "<h1>Merci pour votre commande " +
+                  "Merci pour votre commande " +
                   contact.firstName +
                   "<br>Commande numéro : " +
                   responseOrder +
-                  "</h1>"; // ajouter ce message en H1 à la div
-                thanksCustomer.style.marginTop = "250px";
-                thanksCustomer.style.lineHeight = "80px";
+                  "<br>Vous allez être redirigé vers la page d'accueil d'ici quelques secondes";
+
+                // ajouter ce message en H1 à la div
+
+                thanksCustomer.style.marginTop = "100px";
+                thanksCustomer.style.fontSize = "20px";
                 thanksCustomer.style.textAlign = "center";
                 document.body.appendChild(thanksCustomer); //Ajouter la div  au body.
+                loadingSpinner.style.display = "inline-block"; // ajout de l'animation loading spinner
               }
             };
 
@@ -182,16 +188,17 @@ const checkFormInput = () => {
             request.setRequestHeader("Content-Type", "application/json");
             request.send(toSend); //envoi de l'objet contact / produits
 
-            setTimeout(function () {
-              localStorage.clear(); // le panier redevient vide.
-              window.location.href = "index.html"; // renvoi vers la page d'accueil
-            }, 7000);
+            localStorage.clear(); // le panier redevient vide.
+
+            // setTimeout(() => {
+            //   window.location.href = "index.html"; // renvoi vers la page d'accueil
+            // }, 7000);
           }
         }
       }
     }
   }
-}
+};
 
 btnSubmit.addEventListener("click", function (e) {
   e.preventDefault();
