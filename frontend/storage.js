@@ -25,7 +25,8 @@ if (cart === null || cart.length < 1) {
 } else {
   //si le panier n'est pas vide
   numberEltCart.innerHTML = "(" + cart.length + ")"; //ajout du nombre d'élément dans le compteur de la navbar
-
+  
+ 
 
   /**Creation du tableau si le panier comporte des éléments**/
   for (let i = 0; i < cart.length; i++) {
