@@ -86,10 +86,9 @@ const mail = document.getElementById("email");
 
 const btnSubmit = document.getElementById("envoiDuPanier");
 
-const regexLettersOnly = /^[a-zA-Z]+$/;
+const regexLettersOnly = /^[a-zA-Zàâéêèìîôùûçëäöüï-]+$/;
 const regexEmail = /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@{[a-zA-Z0-9_\-\.]+0\.([a-zA-Z]{2,5}){1,25})+)*$/;
-const regexAdress = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
-const regexCity = /^[A-Za-z0-9 -]*[A-Za-z0-9][A-Za-z0-9 -]*$/;
+const regexCityAndAdress = /^[a-zA-Z0-9àâéêèìîôùûçëäöüï' _-]+$/;
 
 let obj; //init de l'objet qui sera transformé en string avant envoi
 
@@ -102,7 +101,7 @@ const getObjetID = () => {
   }
 };
 
-// création de l'objet contact qui sera ajout à la varibale obj avant transformation en string
+// création de l'objet contact qui sera ajout à la variable obj avant transformation en string
 let contact = {
   firstName: "",
   lastName: "",
@@ -129,7 +128,7 @@ const checkFormInput = () => {
       lName.style.backgroundColor = "#bcf5bc";
       contact.lastName = lName.value;
 
-      if (regexAdress.test(adresse.value) == false) {
+      if (regexCityAndAdress.test(adresse.value) == false) {
         //Regex adresse
         adresse.style.backgroundColor = "#ffc0cb";
         alert("Veuillez informer votre adresse");
@@ -137,7 +136,7 @@ const checkFormInput = () => {
         adresse.style.backgroundColor = "#bcf5bc";
         contact.address = adresse.value;
 
-        if (regexCity.test(ville.value) == false) {
+        if (regexCityAndAdress.test(ville.value) == false) {
           //Regex ville
           ville.style.backgroundColor = "#ffc0cb";
           alert("Veuillez informer votre ville");

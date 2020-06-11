@@ -147,7 +147,6 @@ btnAddToCart.addEventListener("click", function () {
       dropdown.value,
       price.textContent,
       id.textContent,
-      (numberOfThisProduct = 1),
     ]); // ajoute un new array avec ses elements
 
     localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage depuis le array local
