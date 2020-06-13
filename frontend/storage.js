@@ -110,34 +110,50 @@ let contact = {
 };
 
 /****** fonction vérification formulaire******/
+
+const modal = document.getElementById('modal');
+const modalText = document.getElementById('modaltext');
+const closeModal = document.getElementById('closemodal');
+
+
+const modalAlert = (text) =>{
+  mainHtml.style.opacity = "0.2";
+  modal.style.visibility = "visible";
+  modalText.innerHTML = text;
+  closeModal.addEventListener("click",function(){
+    modal.style.visibility = "hidden";
+    mainHtml.style.opacity = "1";
+  });
+}
+
 const checkFormInput = () => {
   if (regexLettersOnly.test(fName.value) == false) {
     fName.style.backgroundColor = "#ffc0cb";
-    alert("Veuillez informer votre prénom");
+    modalAlert("Erreur dans le format de votre prénom");
   } else {
     contact.firstName = fName.value;
     fName.style.backgroundColor = "#bcf5bc";
     if (regexLettersOnly.test(lName.value) == false) {
       lName.style.backgroundColor = "#ffc0cb";
-      alert("Veuillez informer votre nom");
+      modalAlert("Erreur dans le format de votre nom");
     } else {
       lName.style.backgroundColor = "#bcf5bc";
       contact.lastName = lName.value;
       if (regexCityAndAdress.test(adresse.value) == false) {
         adresse.style.backgroundColor = "#ffc0cb";
-        alert("Veuillez informer votre adresse");
+        modalAlert("Erreur dans le format de votre adresse");
       } else {
         adresse.style.backgroundColor = "#bcf5bc";
         contact.address = adresse.value;
         if (regexCityAndAdress.test(ville.value) == false) {
           ville.style.backgroundColor = "#ffc0cb";
-          alert("Veuillez informer votre ville");
+          modalAlert("Erreur dans le format de votre ville");
         } else {
           ville.style.backgroundColor = "#bcf5bc";
           contact.city = ville.value;
           if (regexEmail.test(mail.value) == false) {
             mail.style.backgroundColor = "#ffc0cb";
-            alert("Veuillez informer votre adresse e-mail");
+            modalAlert("Erreur dans le format de votre adresse e-mail");
           } else {
             mail.style.backgroundColor = "#bcf5bc";
             contact.email = mail.value;

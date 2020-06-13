@@ -19,6 +19,8 @@ const garf = document.getElementById("garfunkel");
 
 /******Fetch et Promise******/
 
+
+
 fetch("http://localhost:3000/api/teddies/")
 .then(function (response) {
   if (response.status !== 200) {
@@ -26,6 +28,7 @@ fetch("http://localhost:3000/api/teddies/")
   }
   response.json()
   .then(function (data) {
+    localStorage.clear();
     localStorage.setItem("products", JSON.stringify(data));
   });
 })
