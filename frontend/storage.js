@@ -159,11 +159,20 @@ const checkFormInput = () => {
             contact.email = mail.value;
 
             // quand tous les champs du formulaire sont validés-->
+            return true ;          
+          }
+        }
+      }
+    }
+  }
+};
 
-            getObjetID();
+
+const sendRequest = () =>{
+  getObjetID();
 
             obj = { contact, products }; // ajout de contact et produits à l'objet obj.
-            const toSend = JSON.stringify(obj); // transformation en string pour envoi JSON serveur
+            const toSend = JSON.stringify(obj); 
 
             // envoi des données au serveur
             const request = new XMLHttpRequest();
@@ -200,14 +209,12 @@ const checkFormInput = () => {
             setTimeout(() => {
               window.location.href = "index.html";
             }, 5000);
-          }
-        }
-      }
-    }
-  }
-};
+}
 
 btnSubmitForm.addEventListener("click", function (e) {
   e.preventDefault();
-  checkFormInput();
+  if(checkFormInput()){
+    sendRequest();
+  }
+ 
 });
