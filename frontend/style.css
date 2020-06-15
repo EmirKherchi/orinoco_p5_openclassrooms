@@ -156,6 +156,7 @@ aside {
   -webkit-transition: 300ms ease;
   -o-transition: 300ms ease;
   transition: 300ms ease;
+  margin-bottom: 30px;
 }
 
 .teddy #btn:hover {
@@ -163,6 +164,17 @@ aside {
   background-color: #fff;
   border: solid 1px #333;
 }
+
+#issendtocart{
+  font-weight: 900;
+  color: #333;
+  padding: 20px 10px;
+  max-width: 300px;
+  margin: auto;
+  transition: 300ms ease;
+}
+
+
 
 /** Cart **/
 
