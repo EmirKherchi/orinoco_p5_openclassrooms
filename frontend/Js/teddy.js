@@ -115,6 +115,8 @@ const garfunkel = new teddyBear(
   product[4]._id,
   product[4].imageUrl
 );
+
+
 // création du rendu dynamique sur la page au click
 
 const elementDeNavigation = [norb, arn, lennyNCarl, gus, garf];
