@@ -3,19 +3,24 @@ const nomDeLOurson = document.getElementById("title");
 const imgOurson = document.getElementById("image");
 const descriptionOurson = document.getElementById("description");
 const price = document.getElementById("price");
-const divBtnAddToCart = document.getElementById("divBtn"); //div contenant le btn
-const btnAddToCart = document.getElementById("btn");
-const numberEltCart = document.getElementById("number");
 const id = document.getElementById("id");
+
 const formChoixCouleurs = document.getElementById("choose-color");
 const dropdownMenuCouleurs = document.getElementById("dropdown");
+
+const divBtnAddToCart = document.getElementById("divBtn"); //div contenant le btn
+const btnAddToCart = document.getElementById("btn");
+const statusSendTocartText = document.getElementById("issendtocart");
+const numberEltCart = document.getElementById("number");
+
 const norb = document.getElementById("norbert");
 const arn = document.getElementById("arnold");
 const lennyNCarl = document.getElementById("lennyandcarl");
 const gus = document.getElementById("gustav");
 const garf = document.getElementById("garfunkel");
 
-/******Fetch et Promise******/
+
+/******Fetch******/
 
 fetch("http://localhost:3000/api/teddies/")
   .then(function (response) {
@@ -115,7 +120,7 @@ const garfunkel = new teddyBear(
 const elementDeNavigation = [norb, arn, lennyNCarl, gus, garf];
 const ours = [norbert, arnold, lennyAndCarl, gustav, garfunkel];
 
-const statusSendTocartText = document.getElementById("issendtocart");
+
 
 for (let i = 0; i < elementDeNavigation.length; i++) {
   elementDeNavigation[i].addEventListener("click", function () {

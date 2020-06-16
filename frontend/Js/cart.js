@@ -111,20 +111,19 @@ let contact = {
 
 /****** fonction vérification formulaire******/
 
-const modal = document.getElementById('modal');
-const modalText = document.getElementById('modaltext');
-const closeModal = document.getElementById('closemodal');
+const modal = document.getElementById("modal");
+const modalText = document.getElementById("modaltext");
+const closeModal = document.getElementById("closemodal");
 
-
-const modalAlert = (text) =>{
+const modalAlert = (text) => {
   mainHtml.style.opacity = "0.2";
   modal.style.visibility = "visible";
   modalText.innerHTML = text;
-  closeModal.addEventListener("click",function(){
+  closeModal.addEventListener("click", function () {
     modal.style.visibility = "hidden";
     mainHtml.style.opacity = "1";
   });
-}
+};
 
 const checkFormInput = () => {
   if (regexLettersOnly.test(fName.value) == false) {
@@ -159,7 +158,7 @@ const checkFormInput = () => {
             contact.email = mail.value;
 
             // quand tous les champs du formulaire sont validés-->
-            return true ;          
+            return true;
           }
         }
       }
@@ -167,54 +166,52 @@ const checkFormInput = () => {
   }
 };
 
-
-const sendRequest = () =>{
+const sendRequest = () => {
   getObjetID();
 
-            obj = { contact, products }; // ajout de contact et produits à l'objet obj.
-            const toSend = JSON.stringify(obj); 
+  obj = { contact, products }; // ajout de contact et produits à l'objet obj.
+  const toSend = JSON.stringify(obj);
 
-            // envoi des données au serveur
-            const request = new XMLHttpRequest();
+  // envoi des données au serveur
+  const request = new XMLHttpRequest();
 
-            request.onload = function () {
-              if (this.readyState == XMLHttpRequest.DONE) {
-                response = JSON.parse(this.responseText);
-                let responseOrder;
-                responseOrder = response.orderId;
+  request.onload = function () {
+    if (this.readyState == XMLHttpRequest.DONE) {
+      response = JSON.parse(this.responseText);
+      let responseOrder;
+      responseOrder = response.orderId;
 
-                mainHtml.style.display = "none";
-                const thanksCustomer = document.createElement("div");
-                thanksCustomer.innerHTML =
-                  "Merci pour votre commande " +
-                  contact.firstName +
-                  "<br>Commande numéro : " +
-                  responseOrder +
-                  "<br>Vous allez être redirigé vers la page d'accueil d'ici quelques secondes";
+      mainHtml.style.display = "none";
+      const thanksCustomer = document.createElement("div");
+      thanksCustomer.innerHTML =
+        "Merci pour votre commande " +
+        contact.firstName +
+        "<br>Commande numéro : " +
+        responseOrder +
+        "<br>Vous allez être redirigé vers la page d'accueil d'ici quelques secondes";
 
-                thanksCustomer.style.marginTop = "100px";
-                thanksCustomer.style.fontSize = "20px";
-                thanksCustomer.style.textAlign = "center";
-                document.body.insertBefore(thanksCustomer, loadingSpinner);
-                loadingSpinner.style.display = "inline-block";
-              }
-            };
+      thanksCustomer.style.marginTop = "100px";
+      thanksCustomer.style.fontSize = "20px";
+      thanksCustomer.style.textAlign = "center";
+      document.body.insertBefore(thanksCustomer, loadingSpinner);
+      loadingSpinner.style.display = "inline-block";
+    }
+  }
 
-            request.open("POST", "http://localhost:3000/api/teddies/order");
-            request.setRequestHeader("Content-Type", "application/json");
-            request.send(toSend);
+  request.open("POST", "http://localhost:3000/api/teddies/order");
+  request.setRequestHeader("Content-Type", "application/json");
+  request.send(toSend);
 
-            localStorage.clear();
+  localStorage.clear();
 
-            setTimeout(() => {
-              window.location.href = "index.html";
-            }, 5000);
-}
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 5000);
+};
 
 btnSubmitForm.addEventListener("click", function (e) {
   e.preventDefault();
-  if(checkFormInput()){
+  if (checkFormInput()) {
     sendRequest();
   }
- 
 });
