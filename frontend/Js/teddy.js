@@ -19,16 +19,15 @@ const lennyNCarl = document.getElementById("lennyandcarl");
 const gus = document.getElementById("gustav");
 const garf = document.getElementById("garfunkel");
 
-
 /******Fetch******/
+const fetchPromise = fetch("http://localhost:3000/api/teddies/");
 
-fetch("http://localhost:3000/api/teddies/")
+fetchPromise
   .then(function (response) {
     if (response.status !== 200) {
       console.log("erreur: " + response.status);
     }
     response.json().then(function (data) {
-      localStorage.clear();
       localStorage.setItem("products", JSON.stringify(data));
     });
   })
@@ -37,7 +36,6 @@ fetch("http://localhost:3000/api/teddies/")
   });
 
 /******Création de l'objet Teddy Bear******/
-
 const product = JSON.parse(localStorage.getItem("products"));
 
 class teddyBear {
@@ -116,13 +114,10 @@ const garfunkel = new teddyBear(
   product[4].imageUrl
 );
 
-
 // création du rendu dynamique sur la page au click
 
 const elementDeNavigation = [norb, arn, lennyNCarl, gus, garf];
 const ours = [norbert, arnold, lennyAndCarl, gustav, garfunkel];
-
-
 
 for (let i = 0; i < elementDeNavigation.length; i++) {
   elementDeNavigation[i].addEventListener("click", function () {

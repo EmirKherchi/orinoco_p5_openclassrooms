@@ -75,7 +75,7 @@ if (cart === null || cart.length < 1) {
   }
 }
 
-/****** Formulaire pour validation du panier******/
+/****** REGEX pour validation du panier******/
 
 const fName = document.getElementById("fname");
 const lName = document.getElementById("lname");
@@ -190,19 +190,19 @@ const sendRequest = () => {
         responseOrder +
         "<br>Vous allez être redirigé vers la page d'accueil d'ici quelques secondes";
 
-      thanksCustomer.style.marginTop = "100px";
+      thanksCustomer.style.marginTop = "30%";
       thanksCustomer.style.fontSize = "20px";
       thanksCustomer.style.textAlign = "center";
       document.body.insertBefore(thanksCustomer, loadingSpinner);
       loadingSpinner.style.display = "inline-block";
     }
-  }
+  };
 
   request.open("POST", "http://localhost:3000/api/teddies/order");
   request.setRequestHeader("Content-Type", "application/json");
   request.send(toSend);
 
-  localStorage.clear();
+  localStorage.removeItem("cart");
 
   setTimeout(() => {
     window.location.href = "index.html";
