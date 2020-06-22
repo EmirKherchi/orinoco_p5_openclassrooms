@@ -2,7 +2,7 @@
 const nomDeLOurson = document.getElementById("title");
 const imgOurson = document.getElementById("image");
 const descriptionOurson = document.getElementById("description");
-const price = document.getElementById("price");
+const prixOurson = document.getElementById("price");
 const id = document.getElementById("id");
 
 const formChoixCouleurs = document.getElementById("choose-color");
@@ -19,24 +19,14 @@ const lennyNCarl = document.getElementById("lennyandcarl");
 const gus = document.getElementById("gustav");
 const garf = document.getElementById("garfunkel");
 
-/******Fetch******/
-const fetchPromise = fetch("http://localhost:3000/api/teddies/");
-
-fetchPromise
-  .then(function (response) {
-    if (response.status !== 200) {
-      console.log("erreur: " + response.status);
-    }
-    response.json().then(function (data) {
-      localStorage.setItem("products", JSON.stringify(data));
-    });
-  })
-  .catch(function (error) {
-    console.log(error + " erreur fetch");
-  });
-
 /******Création de l'objet Teddy Bear******/
-const product = JSON.parse(localStorage.getItem("products"));
+let products;
+
+if (localStorage.getItem("products") === null) {
+  nomDeLOurson.innerHTML = "Oups... une erreur s'est produite veuillez revenir à notre page d'accueil";
+} else {
+  products = JSON.parse(localStorage.getItem("products"));
+}
 
 class teddyBear {
   constructor(name, price, description, colors, id, image) {
@@ -47,14 +37,14 @@ class teddyBear {
     this.id = id;
     this.image = image;
   }
-  teddys() {
+  renderThisTeddy() {
     nomDeLOurson.innerHTML = this.name;
     imgOurson.src = this.image;
     imgOurson.style.display = "block";
     descriptionOurson.innerHTML = this.description;
     id.innerHTML = this.id;
     id.style.display = "none";
-    price.innerHTML = (this.price / 100).toFixed(2) + " €";
+    prixOurson.innerHTML = (this.price / 100).toFixed(2) + " €";
     formChoixCouleurs.style.display = "block";
     divBtnAddToCart.style.display = "block";
 
@@ -74,67 +64,62 @@ class teddyBear {
 /****** Création des instances******/
 
 const norbert = new teddyBear(
-  product[0].name,
-  product[0].price,
-  product[0].description,
-  product[0].colors,
-  product[0]._id,
-  product[0].imageUrl
+  products[0].name,
+  products[0].price,
+  products[0].description,
+  products[0].colors,
+  products[0]._id,
+  products[0].imageUrl
 );
 const arnold = new teddyBear(
-  product[1].name,
-  product[1].price,
-  product[1].description,
-  product[1].colors,
-  product[1]._id,
-  product[1].imageUrl
+  products[1].name,
+  products[1].price,
+  products[1].description,
+  products[1].colors,
+  products[1]._id,
+  products[1].imageUrl
 );
 const lennyAndCarl = new teddyBear(
-  product[2].name,
-  product[2].price,
-  product[2].description,
-  product[2].colors,
-  product[2]._id,
-  product[2].imageUrl
+  products[2].name,
+  products[2].price,
+  products[2].description,
+  products[2].colors,
+  products[2]._id,
+  products[2].imageUrl
 );
 const gustav = new teddyBear(
-  product[3].name,
-  product[3].price,
-  product[3].description,
-  product[3].colors,
-  product[3]._id,
-  product[3].imageUrl
+  products[3].name,
+  products[3].price,
+  products[3].description,
+  products[3].colors,
+  products[3]._id,
+  products[3].imageUrl
 );
 const garfunkel = new teddyBear(
-  product[4].name,
-  product[4].price,
-  product[4].description,
-  product[4].colors,
-  product[4]._id,
-  product[4].imageUrl
+  products[4].name,
+  products[4].price,
+  products[4].description,
+  products[4].colors,
+  products[4]._id,
+  products[4].imageUrl
 );
 
 // création du rendu dynamique sur la page au click
 
-const elementDeNavigation = [norb, arn, lennyNCarl, gus, garf];
-const ours = [norbert, arnold, lennyAndCarl, gustav, garfunkel];
+const eltsSideMenu = [norb, arn, lennyNCarl, gus, garf];
+const teddys = [norbert, arnold, lennyAndCarl, gustav, garfunkel];
 
-for (let i = 0; i < elementDeNavigation.length; i++) {
-  elementDeNavigation[i].addEventListener("click", function () {
+for (let i = 0; i < eltsSideMenu.length; i++) {
+  eltsSideMenu[i].addEventListener("click", function () {
     if ((statusSendTocartText.style.display = "block")) {
       statusSendTocartText.style.display = "none";
     }
 
-    ours[i].teddys();
+    teddys[i].renderThisTeddy();
   });
 }
 
-/****** Fonction ajout au panier******/
-const bgColorAlert = "#ffc0cb";
-const textAlert =
-  "Veuillez Choisir la couleur de votre ours en peluche, avant ajout au panier";
-const bgColorValidate = "#bcf5bc";
-const textValidate = "Votre produit est bien ajouté au panier";
+/****** Init panier******/
 
 if (localStorage.getItem("cart") === null) {
   let panierInit = [];
@@ -143,27 +128,34 @@ if (localStorage.getItem("cart") === null) {
 let cart = JSON.parse(localStorage.getItem("cart"));
 numberEltCart.innerHTML = "(" + cart.length + ")";
 
-const statusSendTocart = (bgColor, text) => {
-  statusSendTocartText.style.backgroundColor = bgColor;
-  statusSendTocartText.innerHTML = text;
+/****** Fonction Pour ajout au panier******/
+
+const errorChoiceOfColor = () => {
+  statusSendTocartText.style.backgroundColor = "#ffc0cb";
+  statusSendTocartText.innerHTML = "Veuillez Choisir la couleur de votre ours en peluche, avant ajout au panier";
   statusSendTocartText.style.display = "block";
 };
 
-/****** Fonction Pour ajout au panier******/
+const addedToCart = () => {
+  cart.push([
+    nomDeLOurson.textContent,
+    dropdownMenuCouleurs.value,
+    prixOurson.textContent,
+    id.textContent,
+  ]);
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  numberEltCart.innerHTML = "(" + cart.length + ")";
+  statusSendTocartText.style.backgroundColor = "#bcf5bc";
+  statusSendTocartText.innerHTML = "Votre produit est bien ajouté au panier";
+  statusSendTocartText.style.display = "block";
+};
+
 btnAddToCart.addEventListener("click", function () {
   if (dropdownMenuCouleurs.value === "Personalisez votre ourson") {
-    statusSendTocart(bgColorAlert, textAlert);
+    errorChoiceOfColor();
   } else {
-    cart.push([
-      nomDeLOurson.textContent,
-      dropdownMenuCouleurs.value,
-      price.textContent,
-      id.textContent,
-    ]);
-
-    localStorage.setItem("cart", JSON.stringify(cart)); //Ajout au local storage depuis le array local
-    numberEltCart.innerHTML = "(" + cart.length + ")";
-
-    statusSendTocart(bgColorValidate, textValidate);
+    addedToCart();
   }
 });
