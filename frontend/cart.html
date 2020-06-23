@@ -26,10 +26,10 @@
 <body>
     <div id="modal">
         <div>
-             <p id="modaltext">Content you want the user to see goes here.</p>
-             <button class="btn btn-primary" id="closemodal"> Fermer</button>
+            <p id="modaltext">Content you want the user to see goes here.</p>
+            <button class="btn btn-primary" id="closemodal"> Fermer</button>
         </div>
-   </div>
+    </div>
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -49,7 +49,7 @@
         </nav>
     </header>
 
-    <main class="cart container-fluid text-center">
+    <main id="mainBalise" class="container-fluid text-center">
         <div>
             <h1>Panier</h1>
         </div>
@@ -68,8 +68,8 @@
             <h4>Prix total du panier : <span id="prixTotal"></span></h4>
         </div>
 
-        <div class="container text-center" id="cartForm">
-            <form>
+        <div class="container" id="cartForm">
+            <form autocomplete="off">
                 <div class="form-group">
                     <label for="fname">Prénom:</label>
                     <input type="text" class="form-control" id="fname" name="fname" placeholder="Prénom" required>
@@ -99,7 +99,7 @@
         </div>
 
 
-        
+
 
     </main>
 

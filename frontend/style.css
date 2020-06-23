@@ -165,7 +165,7 @@ aside {
   border: solid 1px #333;
 }
 
-#issendtocart{
+#issendtocart {
   font-weight: 900;
   color: #333;
   padding: 20px 10px;
@@ -175,28 +175,31 @@ aside {
   background-color: #bcf5bc;
 }
 
-
-
 /** Cart **/
+.empty {
+  margin-top: 250px;
+  line-height: 80px;
+  text-align: center;
+}
 
-.cart h1 {
+#mainBalise h1 {
   padding-top: 50px;
   text-align: center;
 }
 
-.cart #tableau {
+#mainBalise #tableau {
   margin: auto;
   width: 50%;
   margin-top: 100px;
 }
-.cart #tableau #tblEntry {
+#mainBalise #tableau #tblEntry {
   height: 50px;
   padding: 0;
   color: #fff;
   background-color: rgb(46, 78, 78);
 }
 
-.cart th {
+#mainBalise th {
   padding-bottom: 20px;
   font-size: 16px;
   height: 50px;
@@ -221,15 +224,15 @@ aside {
   background-color: rgb(206, 59, 59);
 }
 
-.cart #total {
+#mainBalise #total {
   margin-top: 70px;
 }
 
-.cart #cartForm {
+#mainBalise #cartForm {
   margin-top: 100px;
   margin-bottom: 200px;
 }
-.cart #cartForm form {
+#mainBalise #cartForm form {
   font-weight: 600;
 }
 
@@ -252,22 +255,18 @@ aside {
 /*Modal alert form error*/
 #modal {
   z-index: 100000;
-  visibility: hidden;
+  display: none;
   position: absolute;
   left: 0px;
   top: 60%;
-  width:100%;
-  height:100%;
-  text-align:center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
   z-index: 1000;
-  
 }
-#closemodal{
+#closemodal {
   background-color: rgb(46, 78, 78); /* Green */
   color: white;
-  -webkit-transition: 300ms ease;
-  -o-transition: 300ms ease;
-  transition: 300ms ease;
 }
 #closemodal:hover {
   color: #333;
@@ -276,22 +275,28 @@ aside {
 }
 
 #modal div {
-  width:300px;
+  width: 300px;
   margin: 100px auto;
   background-color: #fff;
-  border:2px solid #333;
+  border: 2px solid #333;
   border-radius: 3px;
-  padding:15px;
-  text-align:center;
+  padding: 15px;
+  text-align: center;
   font-weight: 600;
 }
 
+.thanks {
+  margin-top: 15%;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+}
 /*Animation loading */
 
 .lds-spinner {
   display: none;
-  margin-left: 50%;
-  margin-top: 10%;
+  margin: auto;
+  top: 50px;
   position: relative;
   width: 80px;
   height: 80px;
