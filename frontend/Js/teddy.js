@@ -19,11 +19,15 @@ const lennyNCarl = document.getElementById("lennyandcarl");
 const gus = document.getElementById("gustav");
 const garf = document.getElementById("garfunkel");
 
+
 /******Création de l'objet Teddy Bear******/
 let products;
 
 if (localStorage.getItem("products") === null) {
-  nomDeLOurson.innerHTML = "Oups... une erreur s'est produite veuillez revenir à notre page d'accueil";
+  nomDeLOurson.innerHTML = "Oups... une erreur s'est produite vous allez être redirigé vers notre page d'accueil";
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 5000);
 } else {
   products = JSON.parse(localStorage.getItem("products"));
 }
