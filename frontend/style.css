@@ -69,6 +69,12 @@ footer .navbar-nav {
   text-decoration: none;
 }
 
+/**Product list page**/
+#teddys img {
+  margin: auto;
+  width: 250px;
+}
+
 /** Teddies page **/
 .teddy {
   background-color: rgb(46, 78, 78);
@@ -120,9 +126,7 @@ aside {
 .teddy #choose-color {
   display: none;
 }
-#no-selection {
-  margin-top: 180px;
-}
+
 
 .teddy select {
   background-color: rgb(46, 78, 78); /* Green */
@@ -173,6 +177,7 @@ aside {
   margin: auto;
   transition: 300ms ease;
   background-color: #bcf5bc;
+  display: none;
 }
 
 /** Cart **/

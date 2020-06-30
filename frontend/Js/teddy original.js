@@ -13,18 +13,23 @@ const btnAddToCart = document.getElementById("btn");
 const statusSendTocartText = document.getElementById("issendtocart");
 const numberEltCart = document.getElementById("number");
 
+const norb = document.getElementById("norbert");
+const arn = document.getElementById("arnold");
+const lennyNCarl = document.getElementById("lennyandcarl");
+const gus = document.getElementById("gustav");
+const garf = document.getElementById("garfunkel");
 
 
-/******Création de l'objet Teddy Bear depuis le current produit (local storage)*****/
-let currentProduct;
+/******Création de l'objet Teddy Bear******/
+let products;
 
-if (localStorage.getItem("currentProduct") === null) {
+if (localStorage.getItem("products") === null) {
   nomDeLOurson.innerHTML = "Oups... une erreur s'est produite vous allez être redirigé vers notre page d'accueil";
   setTimeout(() => {
     window.location.href = "index.html";
   }, 5000);
 } else {
-  currentProduct = JSON.parse(localStorage.getItem("currentProduct"));
+  products = JSON.parse(localStorage.getItem("products"));
 }
 
 class teddyBear {
@@ -60,21 +65,63 @@ class teddyBear {
   }
 }
 
-/****** Création de l'instance******/
+/****** Création des instances******/
 
-const thisTeddy = new teddyBear(
-  currentProduct[0].name,
-  currentProduct[0].price,
-  currentProduct[0].description,
-  currentProduct[0].colors,
-  currentProduct[0]._id,
-  currentProduct[0].image
+const norbert = new teddyBear(
+  products[0].name,
+  products[0].price,
+  products[0].description,
+  products[0].colors,
+  products[0]._id,
+  products[0].imageUrl
+);
+const arnold = new teddyBear(
+  products[1].name,
+  products[1].price,
+  products[1].description,
+  products[1].colors,
+  products[1]._id,
+  products[1].imageUrl
+);
+const lennyAndCarl = new teddyBear(
+  products[2].name,
+  products[2].price,
+  products[2].description,
+  products[2].colors,
+  products[2]._id,
+  products[2].imageUrl
+);
+const gustav = new teddyBear(
+  products[3].name,
+  products[3].price,
+  products[3].description,
+  products[3].colors,
+  products[3]._id,
+  products[3].imageUrl
+);
+const garfunkel = new teddyBear(
+  products[4].name,
+  products[4].price,
+  products[4].description,
+  products[4].colors,
+  products[4]._id,
+  products[4].imageUrl
 );
 
+// création du rendu dynamique sur la page au click
 
-// création du rendu dynamique 
+const eltsSideMenu = [norb, arn, lennyNCarl, gus, garf];
+const teddys = [norbert, arnold, lennyAndCarl, gustav, garfunkel];
 
-thisTeddy.renderThisTeddy();
+for (let i = 0; i < eltsSideMenu.length; i++) {
+  eltsSideMenu[i].addEventListener("click", function () {
+    if ((statusSendTocartText.style.display = "block")) {
+      statusSendTocartText.style.display = "none";
+    }
+
+    teddys[i].renderThisTeddy();
+  });
+}
 
 /****** Init panier******/
 

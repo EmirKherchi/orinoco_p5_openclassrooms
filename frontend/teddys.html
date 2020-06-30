@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orinoco | Ours en peluche </title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/7fd7f73f67.js" crossorigin="anonymous"></script>
+    <title>Orinoco | Accueil</title>
 
+    <script src="https://kit.fontawesome.com/7fd7f73f67.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -21,10 +20,13 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
     <header>
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html"><i class="fas fa-shopping-cart "></i>Orinoco.com</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -33,7 +35,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="index.html">Accueil</a>
+                    <a class="nav-item nav-link active" href="index.html">Accueil <span
+                            class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="cart.html">Panier<span id="number"></span></a>
 
                 </div>
@@ -41,38 +44,18 @@
         </nav>
 
 
-
-
     </header>
+    <main>
+        <section class="text-center container" id="teddys">
+            <div class="row" id="products-list">
+                
+            </div>
 
-    <main class="teddy text-center container-fluid">
-        <div class="row">
-            <aside class="col-lg-2 col-md-12">
-                <div><a href="teddys.html"><i class="far fa-arrow-alt-circle-left"></i></a></span>
-            </aside>
-            <section class="teddys_display text-center col-lg-10 col-md-12">
 
-                <div id="product">
-                    <h1 id="title">Choisissez votre ours en peluche<br>...</h1>
-                    <img id="image" class=".img-thumbnail" src="images/ticon.png" alt="Image du produit">
-                    <p class="container" id="description"></p>
-                    <p id="id"></p>
-                    <p id="price"></p>
-                    <form id="choose-color" name="choose-color">
-                        <select id="dropdown"></select>
-                    </form>
-                    <div id="divBtn">
-                        <button id="btn">Ajouter au panier</button>
-                        <p id="issendtocart">statut ajout au panier</p>
-                    </div>
-                </div>
-            </section>
-
-        </div>
+        </section>
     </main>
 
     <footer>
-
         <nav class="navbar navbar-dark bg-dark">
 
 
@@ -82,23 +65,9 @@
 
             </div>
         </nav>
-
     </footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="Js/teddy.js"></script>
-
+    <script src="Js/teddys.js"></script>
 
 </body>
 
