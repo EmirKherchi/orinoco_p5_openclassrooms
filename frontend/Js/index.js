@@ -21,6 +21,7 @@ fetchPromise
       console.log("erreur: " + response.status);
     }
     response.json().then(function (data) {
+      localStorage.clear();
       localStorage.setItem("products", JSON.stringify(data));      
     });
   })
