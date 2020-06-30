@@ -70,19 +70,45 @@ footer .navbar-nav {
 }
 
 /**Product list page**/
-#teddys img {
-  margin: auto;
-  width: 250px;
+
+
+#products-list{
+  margin-top: 50px;
+  margin-bottom: 150px;
+}
+.products-list_teddy{
+  margin: 30px 0px;
+  padding: 20px;
+  border: 20px solid transparent;
+}
+.products-list_teddy .btn{
+  background-color: rgb(46, 78, 78); /* Green */
+  border: 1px solid #333;
+  color: white;
+  font-size: 20px;
+  margin-top: 30px;
+  -webkit-transition: 300ms ease;
+  -o-transition: 300ms ease;
+  transition: 300ms ease;
 }
 
-/** Teddies page **/
-.teddy {
-  background-color: rgb(46, 78, 78);
+
+.products-list_teddy .btn:hover{
+  color: #333;
+  background-color: #fff;
+  border: solid 1px #333;
 }
+
+
+.card-body{
+  background-color: rgb(246, 246, 246);
+}
+/** Teddy page **/
+
 .teddys_display {
   background-color: #fff;
   padding-bottom: 150px;
-  padding-top: 110px;
+  padding-top: 60px;
 }
 
 .teddy h1,
@@ -103,24 +129,6 @@ p {
 .price {
   font-weight: 900;
   color: rgb(46, 78, 78);
-}
-
-aside {
-  color: #ccc;
-}
-.teddy ul {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  padding: 0;
-}
-.teddy li {
-  font-size: 18px;
-  font-weight: 300;
-  list-style: none;
-  cursor: pointer;
-}
-.teddy li:hover {
-  font-weight: 600;
 }
 
 .teddy #choose-color {
@@ -169,6 +177,19 @@ aside {
   border: solid 1px #333;
 }
 
+.teddy #arrow{
+  font-size: 25px;
+  color : #333;
+  margin-bottom: 25px;
+  padding-bottom: 2px;
+  text-decoration: none;
+}
+.teddy #arrow:hover{
+  font-size: 25px;
+  color : rgb(46, 78, 78);
+  border-bottom: 1px solid rgb(46, 78, 78);
+}
+
 #issendtocart {
   font-weight: 900;
   color: #333;
@@ -178,6 +199,8 @@ aside {
   transition: 300ms ease;
   background-color: #bcf5bc;
   display: none;
+  margin-bottom: 25px;
+  margin-top: 5px;
 }
 
 /** Cart **/

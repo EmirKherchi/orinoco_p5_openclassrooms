@@ -27,7 +27,7 @@ if (localStorage.getItem("currentProduct") === null) {
   currentProduct = JSON.parse(localStorage.getItem("currentProduct"));
 }
 
-class teddyBear {
+class thisTeddyBear {
   constructor(name, price, description, colors, id, image) {
     this.name = name;
     this.price = price;
@@ -62,12 +62,12 @@ class teddyBear {
 
 /****** Création de l'instance******/
 
-const thisTeddy = new teddyBear(
+const thisTeddy = new thisTeddyBear(
   currentProduct[0].name,
   currentProduct[0].price,
   currentProduct[0].description,
   currentProduct[0].colors,
-  currentProduct[0]._id,
+  currentProduct[0].id,
   currentProduct[0].image
 );
 
