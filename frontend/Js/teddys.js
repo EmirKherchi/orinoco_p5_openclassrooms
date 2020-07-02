@@ -37,7 +37,6 @@ class teddyBear {
   }
   renderListOfTeddys() {
     let teddyDiv = document.createElement("div");
-    // let teddyDivBtn = document.createElement("div");
     let teddyCardBody = document.createElement("div");
     let teddyImage = document.createElement("img");
     let teddyName = document.createElement("h4");
